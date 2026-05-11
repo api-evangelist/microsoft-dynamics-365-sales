@@ -1,0 +1,74 @@
+aid: microsoft-dynamics-365-sales
+name: Microsoft Dynamics 365 Sales
+description: >-
+  Microsoft Dynamics 365 Sales is Microsoft's enterprise CRM application for
+  managing leads, opportunities, accounts, contacts, sales pipelines, forecasts,
+  and customer relationships, built on the Microsoft Dataverse platform and
+  integrated with Microsoft 365, Teams, Copilot, and Power Platform. Developers
+  programmatically interact with Dynamics 365 Sales data through the Dataverse
+  Web API, an OData v4.0 RESTful interface that exposes every table, action,
+  and function in a Sales environment. The Dataverse Web API uses OAuth 2.0
+  (Microsoft Entra ID) Bearer token authentication and is reached at a
+  per-environment endpoint such as https://{org}.api.crm.dynamics.com/api/data/v9.2/.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - CRM
+  - Sales
+  - Customer Relationship Management
+  - Dynamics 365
+  - Microsoft
+  - Dataverse
+  - OData
+  - Sales Automation
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/microsoft-dynamics-365-sales/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: microsoft-dynamics-365-sales:dataverse-web-api
+    name: Microsoft Dataverse Web API (Dynamics 365 Sales)
+    description: >-
+      OData v4.0 RESTful Web API for Microsoft Dataverse used to create, read,
+      update, and delete Dynamics 365 Sales records (leads, opportunities,
+      accounts, contacts, quotes, orders, invoices, products) and to invoke
+      bound and unbound actions and functions. Authentication uses OAuth 2.0
+      Bearer tokens issued by Microsoft Entra ID; the endpoint is
+      per-environment, e.g. https://{org}.api.crm.dynamics.com/api/data/v9.2/.
+    humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+    baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+    tags:
+      - CRM
+      - Sales
+      - Dataverse
+      - OData
+      - Web API
+      - Dynamics 365
+    properties:
+      - type: Documentation
+        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about
+      - type: Overview
+        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+      - type: Service Documents
+        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-service-documents
+      - type: Getting Started
+        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api
+      - type: Authentication
+        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
+
+common:
+  - type: Website
+    url: https://www.microsoft.com/en-us/dynamics-365/products/sales
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics365/sales/
+  - type: Developer Documentation
+    url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing
+  - type: Sign Up
+    url: https://dynamics.microsoft.com/en-us/sales/overview/
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
