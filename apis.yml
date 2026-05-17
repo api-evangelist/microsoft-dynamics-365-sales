@@ -52,7 +52,7 @@ apis:
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
       - type: Service Documents
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-service-documents
-      - type: Getting Started
+      - type: GettingStarted
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api
       - type: Authentication
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
@@ -66,7 +66,7 @@ common:
     url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
   - type: Pricing
     url: https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing
-  - type: Sign Up
+  - type: SignUp
     url: https://dynamics.microsoft.com/en-us/sales/overview/
 
 maintainers:
