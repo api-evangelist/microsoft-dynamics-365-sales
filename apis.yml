@@ -58,6 +58,10 @@ apis:
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
 
 common:
+  - type: GitHubOrganization
+    url: https://github.com/MicrosoftDocs
+  - type: LinkedIn
+    url: https://www.linkedin.com/showcase/microsoft-dynamics-365-sales
   - type: Website
     url: https://www.microsoft.com/en-us/dynamics-365/products/sales
   - type: Documentation
