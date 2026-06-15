@@ -1,0 +1,674 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales)",
+    "version": "v9.2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts",
+            "headers": [
+              {
+                "name": "OData-MaxVersion",
+                "value": ""
+              },
+              {
+                "name": "OData-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query accounts"
+        },
+        {
+          "info": {
+            "name": "Create an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts",
+            "headers": [
+              {
+                "name": "OData-MaxVersion",
+                "value": ""
+              },
+              {
+                "name": "OData-Version",
+                "value": ""
+              },
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an account"
+        },
+        {
+          "info": {
+            "name": "Get an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts(:accountid)",
+            "params": [
+              {
+                "name": "accountid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get an account"
+        },
+        {
+          "info": {
+            "name": "Update an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts(:accountid)",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an account"
+        },
+        {
+          "info": {
+            "name": "Delete an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts(:accountid)",
+            "params": [
+              {
+                "name": "accountid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts",
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query contacts"
+        },
+        {
+          "info": {
+            "name": "Create a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a contact"
+        },
+        {
+          "info": {
+            "name": "Get a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts(:contactid)",
+            "params": [
+              {
+                "name": "contactid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a contact"
+        },
+        {
+          "info": {
+            "name": "Update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts(:contactid)",
+            "params": [
+              {
+                "name": "contactid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a contact"
+        },
+        {
+          "info": {
+            "name": "Delete a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts(:contactid)",
+            "params": [
+              {
+                "name": "contactid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a contact"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Leads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/leads",
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query leads"
+        },
+        {
+          "info": {
+            "name": "Create a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/leads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a lead"
+        },
+        {
+          "info": {
+            "name": "Get a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/leads(:leadid)",
+            "params": [
+              {
+                "name": "leadid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a lead"
+        },
+        {
+          "info": {
+            "name": "Update a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/leads(:leadid)",
+            "params": [
+              {
+                "name": "leadid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a lead"
+        },
+        {
+          "info": {
+            "name": "Delete a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/leads(:leadid)",
+            "params": [
+              {
+                "name": "leadid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a lead"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Opportunities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query opportunities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities"
+          },
+          "docs": "Query opportunities"
+        },
+        {
+          "info": {
+            "name": "Create an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an opportunity"
+        },
+        {
+          "info": {
+            "name": "Get an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities(:opportunityid)",
+            "params": [
+              {
+                "name": "opportunityid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an opportunity"
+        },
+        {
+          "info": {
+            "name": "Update an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities(:opportunityid)",
+            "params": [
+              {
+                "name": "opportunityid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an opportunity"
+        },
+        {
+          "info": {
+            "name": "Delete an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities(:opportunityid)",
+            "params": [
+              {
+                "name": "opportunityid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an opportunity"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/quotes"
+          },
+          "docs": "Query quotes"
+        },
+        {
+          "info": {
+            "name": "Create a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a quote"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SalesOrders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query sales orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/salesorders"
+          },
+          "docs": "Query sales orders"
+        },
+        {
+          "info": {
+            "name": "Create a sales order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/salesorders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a sales order"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/invoices"
+          },
+          "docs": "Query invoices"
+        },
+        {
+          "info": {
+            "name": "Create an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/invoices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an invoice"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/products"
+          },
+          "docs": "Query products"
+        },
+        {
+          "info": {
+            "name": "Create a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a product"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/tasks"
+          },
+          "docs": "Query tasks"
+        },
+        {
+          "info": {
+            "name": "Create a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/tasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a task"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a batch of OData operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/$batch"
+          },
+          "docs": "Execute a batch of OData operations"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
