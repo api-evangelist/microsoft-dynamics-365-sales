@@ -11,7 +11,7 @@ description: >-
   (Microsoft Entra ID) Bearer token authentication and is reached at a
   per-environment endpoint such as https://{org}.api.crm.dynamics.com/api/data/v9.2/.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - CRM
   - Sales
