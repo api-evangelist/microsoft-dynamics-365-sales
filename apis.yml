@@ -66,11 +66,11 @@ common:
     url: https://www.microsoft.com/en-us/dynamics-365/products/sales
   - type: Documentation
     url: https://learn.microsoft.com/en-us/dynamics365/sales/
-  - type: Developer Documentation
+  - type: Documentation
     url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
   - type: Pricing
     url: https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing
-  - type: SignUp
+  - type: Signup
     url: https://dynamics.microsoft.com/en-us/sales/overview/
 
 maintainers:
