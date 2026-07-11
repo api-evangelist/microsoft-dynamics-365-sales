@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/microsoft-dynamics-365-sales-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/microsoft-dynamics-365-sales-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+  description: Microsoft Entra ID OAuth 2.0 bearer token
+scopes:
+- scope: https://{org}.api.crm.dynamics.com/.default
+  description: Dataverse environment access
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/microsoft-dynamics-365-sales-openapi.yml

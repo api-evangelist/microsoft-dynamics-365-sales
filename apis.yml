@@ -58,6 +58,8 @@ apis:
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
 
 common:
+  - type: OAuthScopes
+    url: scopes/microsoft-dynamics-365-sales-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/MicrosoftDocs
   - type: LinkedIn
@@ -72,6 +74,8 @@ common:
     url: https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing
   - type: Signup
     url: https://dynamics.microsoft.com/en-us/sales/overview/
+  - url: https://www.microsoft.com/en-us/dynamics-365/blog/feed/
+    type: Blog
 
 maintainers:
   - FN: Kin Lane
