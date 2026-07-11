@@ -58,6 +58,14 @@ apis:
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
 
 common:
+  - type: TrustCenter
+    url: security/microsoft-dynamics-365-sales-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/microsoft-dynamics-365-sales-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/microsoft-dynamics-365-sales-domain-security.yml
+  - type: Authentication
+    url: authentication/microsoft-dynamics-365-sales-authentication.yml
   - type: OAuthScopes
     url: scopes/microsoft-dynamics-365-sales-scopes.yml
   - type: GitHubOrganization
