@@ -58,6 +58,8 @@ apis:
         url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/microsoft-dynamics-365-sales-agentic-access.yml
   - type: TrustCenter
     url: security/microsoft-dynamics-365-sales-trust-center.yml
   - type: VulnerabilityDisclosure
