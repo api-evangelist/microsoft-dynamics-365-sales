@@ -1,0 +1,253 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts API
+  description: 'OData v4 RESTful Web API for Microsoft Dataverse, the platform behind
+
+    Dynamics 365 Sales. Used to create, read, update, and delete Dynamics
+
+    365 Sales records (accounts, contacts, leads, opportunities, quotes,
+
+    orders, invoices, products, tasks) and to invoke bound and unbound
+
+    actions and functions. Authentication uses OAuth 2.0 bearer tokens
+
+    issued by Microsoft Entra ID; the endpoint is per-environment, for
+
+    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.
+
+    '
+  version: v9.2
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Microsoft Terms of Use
+    url: https://www.microsoft.com/en-us/legal/terms-of-use
+servers:
+- url: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  description: Dataverse environment endpoint
+  variables:
+    org:
+      default: contoso
+      description: Dataverse organization (environment) prefix
+security:
+- oauth2: []
+tags:
+- name: Accounts
+  description: Account (customer organization) records
+paths:
+  /accounts:
+    get:
+      tags:
+      - Accounts
+      summary: Query accounts
+      operationId: accounts_list
+      parameters:
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/odataMaxVersion'
+      - $ref: '#/components/parameters/odataVersion'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCollection'
+    post:
+      tags:
+      - Accounts
+      summary: Create an account
+      operationId: accounts_create
+      parameters:
+      - $ref: '#/components/parameters/odataMaxVersion'
+      - $ref: '#/components/parameters/odataVersion'
+      - $ref: '#/components/parameters/prefer'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '204':
+          description: No Content (with OData-EntityId header)
+        '201':
+          description: Created (with return=representation Prefer header)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /accounts({accountid}):
+    get:
+      tags:
+      - Accounts
+      summary: Get an account
+      operationId: accounts_get
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+    patch:
+      tags:
+      - Accounts
+      summary: Update an account
+      operationId: accounts_update
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '204':
+          description: No Content
+    delete:
+      tags:
+      - Accounts
+      summary: Delete an account
+      operationId: accounts_delete
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      responses:
+        '204':
+          description: No Content
+components:
+  parameters:
+    expand:
+      name: $expand
+      in: query
+      schema:
+        type: string
+    odataVersion:
+      name: OData-Version
+      in: header
+      schema:
+        type: string
+        default: '4.0'
+    accountId:
+      name: accountid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    select:
+      name: $select
+      in: query
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      schema:
+        type: string
+    ifMatch:
+      name: If-Match
+      in: header
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      schema:
+        type: string
+    prefer:
+      name: Prefer
+      in: header
+      description: Set to "return=representation" to receive the created record in the response
+      schema:
+        type: string
+    odataMaxVersion:
+      name: OData-MaxVersion
+      in: header
+      schema:
+        type: string
+        default: '4.0'
+    top:
+      name: $top
+      in: query
+      schema:
+        type: integer
+  schemas:
+    AccountCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        '@odata.nextLink':
+          type: string
+    Account:
+      type: object
+      properties:
+        accountid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        accountnumber:
+          type: string
+        accountcategorycode:
+          type: integer
+        creditonhold:
+          type: boolean
+        revenue:
+          type: number
+          format: double
+        description:
+          type: string
+        address1_line1:
+          type: string
+        address1_city:
+          type: string
+        address1_country:
+          type: string
+        address1_latitude:
+          type: number
+          format: double
+        telephone1:
+          type: string
+        emailaddress1:
+          type: string
+        websiteurl:
+          type: string
+        primarycontactid@odata.bind:
+          type: string
+          description: Associate to existing contact via /contacts(guid)
+        createdon:
+          type: string
+          format: date-time
+        modifiedon:
+          type: string
+          format: date-time
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Microsoft Entra ID OAuth 2.0 bearer token
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            https://{org}.api.crm.dynamics.com/.default: Dataverse environment access
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            https://{org}.api.crm.dynamics.com/.default: Service-to-service access

@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Products API
+  description: 'OData v4 RESTful Web API for Microsoft Dataverse, the platform behind
+
+    Dynamics 365 Sales. Used to create, read, update, and delete Dynamics
+
+    365 Sales records (accounts, contacts, leads, opportunities, quotes,
+
+    orders, invoices, products, tasks) and to invoke bound and unbound
+
+    actions and functions. Authentication uses OAuth 2.0 bearer tokens
+
+    issued by Microsoft Entra ID; the endpoint is per-environment, for
+
+    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.
+
+    '
+  version: v9.2
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Microsoft Terms of Use
+    url: https://www.microsoft.com/en-us/legal/terms-of-use
+servers:
+- url: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  description: Dataverse environment endpoint
+  variables:
+    org:
+      default: contoso
+      description: Dataverse organization (environment) prefix
+security:
+- oauth2: []
+tags:
+- name: Products
+  description: Product records
+paths:
+  /products:
+    get:
+      tags:
+      - Products
+      summary: Query products
+      operationId: products_list
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Products
+      summary: Create a product
+      operationId: products_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Microsoft Entra ID OAuth 2.0 bearer token
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            https://{org}.api.crm.dynamics.com/.default: Dataverse environment access
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            https://{org}.api.crm.dynamics.com/.default: Service-to-service access
