@@ -11,7 +11,19 @@ description: >-
   (Microsoft Entra ID) Bearer token authentication and is reached at a
   per-environment endpoint such as https://{org}.api.crm.dynamics.com/api/data/v9.2/.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-dynamics-365-sales.png
 tags:
   - CRM
   - Sales
@@ -27,36 +39,136 @@ created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-  - aid: microsoft-dynamics-365-sales:dataverse-web-api
-    name: Microsoft Dataverse Web API (Dynamics 365 Sales)
-    description: >-
-      OData v4.0 RESTful Web API for Microsoft Dataverse used to create, read,
-      update, and delete Dynamics 365 Sales records (leads, opportunities,
-      accounts, contacts, quotes, orders, invoices, products) and to invoke
-      bound and unbound actions and functions. Authentication uses OAuth 2.0
-      Bearer tokens issued by Microsoft Entra ID; the endpoint is
-      per-environment, e.g. https://{org}.api.crm.dynamics.com/api/data/v9.2/.
-    humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
-    baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
-    tags:
-      - CRM
-      - Sales
-      - Dataverse
-      - OData
-      - Web API
-      - Dynamics 365
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about
-      - type: Overview
-        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
-      - type: Service Documents
-        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-service-documents
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
-
+- aid: microsoft-dynamics-365-sales:dataverse-web-api
+  name: Microsoft Dataverse Web API (Dynamics 365 Sales)
+  description: >-
+    OData v4.0 RESTful Web API for Microsoft Dataverse used to create, read, update, and delete Dynamics
+    365 Sales records (leads, opportunities, accounts, contacts, quotes, orders, invoices, products) and
+    to invoke bound and unbound actions and functions. Authentication uses OAuth 2.0 Bearer tokens issued
+    by Microsoft Entra ID; the endpoint is per-environment, e.g. https://{org}.api.crm.dynamics.com/api/data/v9.2/.
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - CRM
+  - Sales
+  - Dataverse
+  - OData
+  - Web API
+  - Dynamics 365
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about
+  - type: Overview
+    url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  - type: Service Documents
+    url: >-
+      https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-service-documents
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-accounts-api
+  name: Microsoft Dynamics 365 Sales Accounts API
+  description: Account (customer organization) records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-accounts-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-batch-api
+  name: Microsoft Dynamics 365 Sales $batch API
+  description: The $batch API from Microsoft Dynamics 365 Sales — 1 operation(s) for $batch.
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - $batch
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-batch-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-contacts-api
+  name: Microsoft Dynamics 365 Sales Contacts API
+  description: Contact (person) records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-contacts-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-invoices-api
+  name: Microsoft Dynamics 365 Sales Invoices API
+  description: Invoice records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-invoices-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-leads-api
+  name: Microsoft Dynamics 365 Sales Leads API
+  description: Sales lead records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Leads
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-leads-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-opportunities-api
+  name: Microsoft Dynamics 365 Sales Opportunities API
+  description: Sales opportunity records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Opportunities
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-opportunities-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-products-api
+  name: Microsoft Dynamics 365 Sales Products API
+  description: Product records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-products-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-quotes-api
+  name: Microsoft Dynamics 365 Sales Quotes API
+  description: Sales quote records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-quotes-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-salesorders-api
+  name: Microsoft Dynamics 365 Sales SalesOrders API
+  description: Sales order records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - SalesOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-salesorders-api-openapi.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-tasks-api
+  name: Microsoft Dynamics 365 Sales Tasks API
+  description: Activity tasks
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-tasks-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/microsoft-dynamics-365-sales-agentic-access.yml
