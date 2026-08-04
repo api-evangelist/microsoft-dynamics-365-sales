@@ -1,0 +1,592 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Dataverse Web API (Dynamics 365 Sales)
+  description: |
+    OData v4 RESTful Web API for Microsoft Dataverse, the platform behind
+    Dynamics 365 Sales. Used to create, read, update, and delete Dynamics
+    365 Sales records (accounts, contacts, leads, opportunities, quotes,
+    orders, invoices, products, tasks) and to invoke bound and unbound
+    actions and functions. Authentication uses OAuth 2.0 bearer tokens
+    issued by Microsoft Entra ID; the endpoint is per-environment, for
+    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.
+  version: "v9.2"
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Microsoft Terms of Use
+    url: https://www.microsoft.com/en-us/legal/terms-of-use
+servers:
+  - url: https://{org}.api.crm.dynamics.com/api/data/v9.2
+    description: Dataverse environment endpoint
+    variables:
+      org:
+        default: contoso
+        description: Dataverse organization (environment) prefix
+security:
+  - oauth2: []
+tags:
+  - name: Accounts
+    description: Account (customer organization) records
+  - name: Contacts
+    description: Contact (person) records
+  - name: Leads
+    description: Sales lead records
+  - name: Opportunities
+    description: Sales opportunity records
+  - name: Quotes
+    description: Sales quote records
+  - name: SalesOrders
+    description: Sales order records
+  - name: Invoices
+    description: Invoice records
+  - name: Products
+    description: Product records
+  - name: Tasks
+    description: Activity tasks
+paths:
+  /accounts:
+    get:
+      tags: [Accounts]
+      summary: Query accounts
+      operationId: accounts_list
+      parameters:
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/expand'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/odataMaxVersion'
+        - $ref: '#/components/parameters/odataVersion'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCollection'
+    post:
+      tags: [Accounts]
+      summary: Create an account
+      operationId: accounts_create
+      parameters:
+        - $ref: '#/components/parameters/odataMaxVersion'
+        - $ref: '#/components/parameters/odataVersion'
+        - $ref: '#/components/parameters/prefer'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '204':
+          description: No Content (with OData-EntityId header)
+        '201':
+          description: Created (with return=representation Prefer header)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /accounts({accountid}):
+    get:
+      tags: [Accounts]
+      summary: Get an account
+      operationId: accounts_get
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+    patch:
+      tags: [Accounts]
+      summary: Update an account
+      operationId: accounts_update
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '204':
+          description: No Content
+    delete:
+      tags: [Accounts]
+      summary: Delete an account
+      operationId: accounts_delete
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        '204':
+          description: No Content
+  /contacts:
+    get:
+      tags: [Contacts]
+      summary: Query contacts
+      operationId: contacts_list
+      parameters:
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/top'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Contacts]
+      summary: Create a contact
+      operationId: contacts_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /contacts({contactid}):
+    get:
+      tags: [Contacts]
+      summary: Get a contact
+      operationId: contacts_get
+      parameters:
+        - name: contactid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Contacts]
+      summary: Update a contact
+      operationId: contacts_update
+      parameters:
+        - name: contactid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+    delete:
+      tags: [Contacts]
+      summary: Delete a contact
+      operationId: contacts_delete
+      parameters:
+        - name: contactid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+  /leads:
+    get:
+      tags: [Leads]
+      summary: Query leads
+      operationId: leads_list
+      parameters:
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/filter'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Leads]
+      summary: Create a lead
+      operationId: leads_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /leads({leadid}):
+    get:
+      tags: [Leads]
+      summary: Get a lead
+      operationId: leads_get
+      parameters:
+        - name: leadid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Leads]
+      summary: Update a lead
+      operationId: leads_update
+      parameters:
+        - name: leadid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+    delete:
+      tags: [Leads]
+      summary: Delete a lead
+      operationId: leads_delete
+      parameters:
+        - name: leadid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+  /opportunities:
+    get:
+      tags: [Opportunities]
+      summary: Query opportunities
+      operationId: opportunities_list
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Opportunities]
+      summary: Create an opportunity
+      operationId: opportunities_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /opportunities({opportunityid}):
+    get:
+      tags: [Opportunities]
+      summary: Get an opportunity
+      operationId: opportunities_get
+      parameters:
+        - name: opportunityid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Opportunities]
+      summary: Update an opportunity
+      operationId: opportunities_update
+      parameters:
+        - name: opportunityid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+    delete:
+      tags: [Opportunities]
+      summary: Delete an opportunity
+      operationId: opportunities_delete
+      parameters:
+        - name: opportunityid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+  /quotes:
+    get:
+      tags: [Quotes]
+      summary: Query quotes
+      operationId: quotes_list
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Quotes]
+      summary: Create a quote
+      operationId: quotes_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /salesorders:
+    get:
+      tags: [SalesOrders]
+      summary: Query sales orders
+      operationId: salesorders_list
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [SalesOrders]
+      summary: Create a sales order
+      operationId: salesorders_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /invoices:
+    get:
+      tags: [Invoices]
+      summary: Query invoices
+      operationId: invoices_list
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Invoices]
+      summary: Create an invoice
+      operationId: invoices_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /products:
+    get:
+      tags: [Products]
+      summary: Query products
+      operationId: products_list
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Products]
+      summary: Create a product
+      operationId: products_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /tasks:
+    get:
+      tags: [Tasks]
+      summary: Query tasks
+      operationId: tasks_list
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Tasks]
+      summary: Create a task
+      operationId: tasks_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '204':
+          description: No Content
+  /$batch:
+    post:
+      summary: Execute a batch of OData operations
+      operationId: batch_execute
+      requestBody:
+        required: true
+        content:
+          multipart/mixed:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Microsoft Entra ID OAuth 2.0 bearer token
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            https://{org}.api.crm.dynamics.com/.default: Dataverse environment access
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            https://{org}.api.crm.dynamics.com/.default: Service-to-service access
+  parameters:
+    accountId:
+      name: accountid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    select:
+      name: $select
+      in: query
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      schema:
+        type: string
+    expand:
+      name: $expand
+      in: query
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      schema:
+        type: integer
+    odataVersion:
+      name: OData-Version
+      in: header
+      schema:
+        type: string
+        default: "4.0"
+    odataMaxVersion:
+      name: OData-MaxVersion
+      in: header
+      schema:
+        type: string
+        default: "4.0"
+    prefer:
+      name: Prefer
+      in: header
+      description: 'Set to "return=representation" to receive the created record in the response'
+      schema:
+        type: string
+    ifMatch:
+      name: If-Match
+      in: header
+      schema:
+        type: string
+  schemas:
+    Account:
+      type: object
+      properties:
+        accountid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        accountnumber:
+          type: string
+        accountcategorycode:
+          type: integer
+        creditonhold:
+          type: boolean
+        revenue:
+          type: number
+          format: double
+        description:
+          type: string
+        address1_line1:
+          type: string
+        address1_city:
+          type: string
+        address1_country:
+          type: string
+        address1_latitude:
+          type: number
+          format: double
+        telephone1:
+          type: string
+        emailaddress1:
+          type: string
+        websiteurl:
+          type: string
+        primarycontactid@odata.bind:
+          type: string
+          description: 'Associate to existing contact via /contacts(guid)'
+        createdon:
+          type: string
+          format: date-time
+        modifiedon:
+          type: string
+          format: date-time
+    AccountCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        '@odata.nextLink':
+          type: string
