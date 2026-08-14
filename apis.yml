@@ -36,7 +36,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/microsoft-dynamics-365-sales/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: microsoft-dynamics-365-sales:dataverse-web-api
@@ -79,6 +79,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-accounts-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-accounts-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-batch-api
   name: Microsoft Dynamics 365 Sales $batch API
   description: The $batch API from Microsoft Dynamics 365 Sales — 1 operation(s) for $batch.
@@ -89,6 +91,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-batch-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-batch-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-contacts-api
   name: Microsoft Dynamics 365 Sales Contacts API
   description: Contact (person) records
@@ -99,6 +103,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-contacts-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-contacts-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-invoices-api
   name: Microsoft Dynamics 365 Sales Invoices API
   description: Invoice records
@@ -109,6 +115,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-invoices-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-invoices-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-leads-api
   name: Microsoft Dynamics 365 Sales Leads API
   description: Sales lead records
@@ -119,6 +127,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-leads-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-leads-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-opportunities-api
   name: Microsoft Dynamics 365 Sales Opportunities API
   description: Sales opportunity records
@@ -129,6 +139,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-opportunities-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-opportunities-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-products-api
   name: Microsoft Dynamics 365 Sales Products API
   description: Product records
@@ -139,6 +151,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-products-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-products-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-quotes-api
   name: Microsoft Dynamics 365 Sales Quotes API
   description: Sales quote records
@@ -149,6 +163,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-quotes-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-quotes-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-salesorders-api
   name: Microsoft Dynamics 365 Sales SalesOrders API
   description: Sales order records
@@ -159,6 +175,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-salesorders-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-salesorders-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-tasks-api
   name: Microsoft Dynamics 365 Sales Tasks API
   description: Activity tasks
@@ -169,6 +187,36 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-tasks-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-tasks-api-overlay.yaml
+- aid: microsoft-dynamics-365-sales:dynamics-365-sales-mcp-server
+  name: Dynamics 365 Sales MCP Server
+  description: >-
+    Microsoft's hosted Model Context Protocol server for Dynamics 365 Sales. Exposes 20
+    sales tools to any MCP-capable agent — lead and account research, competitor research,
+    engagement summaries, lead qualification assessment, outreach email drafting,
+    MEDDPICC opportunity health, opportunity signals, stakeholders, risks and pain points,
+    record catch-ups, and SharePoint document search and Q&A. The endpoint is
+    per-environment and authenticates with Microsoft Entra ID. It carries no CRUD tools —
+    creating and updating Sales records goes through the Dataverse MCP server at
+    https://{org}.api.crm.dynamics.com/api/mcp or the Dataverse Web API.
+  humanURL: https://learn.microsoft.com/en-us/dynamics365/sales/connect-agents-to-model-context-protocol
+  baseURL: https://agent365.svc.cloud.microsoft/mcp/environments/{EnvironmentID}/servers/msdyn_SalesMCPServer
+  tags:
+  - MCP
+  - Agents
+  - Sales
+  - Copilot
+  - Dynamics 365
+  properties:
+  - type: MCPServer
+    url: mcp/microsoft-dynamics-365-sales-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/microsoft-dynamics-365-sales-tool-crosswalk.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics365/sales/model-context-protocol-sales-overview
+  - type: Authentication
+    url: authentication/microsoft-dynamics-365-sales-authentication.yml
 common:
   - type: AgenticAccess
     url: agentic-access/microsoft-dynamics-365-sales-agentic-access.yml
@@ -194,11 +242,83 @@ common:
     url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
   - type: Pricing
     url: https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing
-  - type: Signup
+  - type: SignUp
     url: https://dynamics.microsoft.com/en-us/sales/overview/
   - url: https://www.microsoft.com/en-us/dynamics-365/blog/feed/
     type: Blog
+  - type: DeveloperPortal
+    url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/overview
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api
+  - type: Support
+    url: https://www.microsoft.com/en-us/dynamics-365/support
+  - type: Community
+    url: https://community.dynamics.com/forums/thread/?groupid=d365sales
+  - type: Roadmap
+    url: https://learn.microsoft.com/en-us/dynamics365/release-plans/
+  - type: TermsOfService
+    url: https://www.microsoft.com/en-us/servicesagreement/
+  - type: PrivacyPolicy
+    url: https://privacy.microsoft.com/en-us/privacystatement
+  - type: SLA
+    url: >-
+      https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services
+  - type: Packages
+    url: packages/microsoft-dynamics-365-sales-packages.yml
+  - type: SDKs
+    url: packages/microsoft-dynamics-365-sales-packages.yml
+  - type: CLI
+    url: cli/microsoft-dynamics-365-sales-cli.yml
+  - type: MCPServer
+    url: mcp/microsoft-dynamics-365-sales-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/microsoft-dynamics-365-sales-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/microsoft-dynamics-365-sales-llms.txt
+  - type: WellKnown
+    url: well-known/microsoft-dynamics-365-sales-well-known.yml
+  - type: SecurityTxt
+    url: well-known/microsoft-dynamics-365-sales-security.txt
+  - type: Security
+    url: https://www.microsoft.com/en-us/msrc/cvd
+  - type: Compliance
+    url: https://www.microsoft.com/en-us/trust-center/compliance/compliance-overview
+  - type: Conformance
+    url: conformance/microsoft-dynamics-365-sales-conformance.yml
+  - type: Conventions
+    url: conventions/microsoft-dynamics-365-sales-conventions.yml
+  - type: ErrorCatalog
+    url: errors/microsoft-dynamics-365-sales-problem-types.yml
+  - type: DataModel
+    url: data-model/microsoft-dynamics-365-sales-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/microsoft-dynamics-365-sales-lifecycle.yml
+  - type: StatusPage
+    url: https://status.cloud.microsoft/
+  - type: Deprecation
+    url: https://learn.microsoft.com/en-us/power-platform/important-changes-coming
+  - type: ChangeLog
+    url: changelog/microsoft-dynamics-365-sales-changelog.yml
+  - type: Sandbox
+    url: sandbox/microsoft-dynamics-365-sales-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/microsoft-dynamics-365-sales-webhooks.yml
+  - type: Plans
+    url: plans/microsoft-dynamics-365-sales-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/microsoft-dynamics-365-sales-rate-limits.yml
 
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 33
+  pass: local-v1
