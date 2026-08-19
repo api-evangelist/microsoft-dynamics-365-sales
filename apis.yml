@@ -37,7 +37,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/microsoft-dynamics-365-sales/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-08-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: microsoft-dynamics-365-sales:dataverse-web-api
   name: Microsoft Dataverse Web API (Dynamics 365 Sales)
