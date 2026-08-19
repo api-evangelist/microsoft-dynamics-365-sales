@@ -1,0 +1,99 @@
+generated: '2026-08-13'
+method: probed
+source: live probe of /.well-known/* on every host named in apis.yml and openapi servers[]
+note: >-
+  The Dynamics 365 Sales / Dataverse Web API base host is per-tenant and templated
+  (https://{org}.api.crm.dynamics.com), so there is no single anonymous API host to probe.
+  The hosts probed are the corporate host (www.microsoft.com), the product host
+  (dynamics.microsoft.com), the docs host (learn.microsoft.com), the Microsoft Entra ID
+  authority named in the OpenAPI securitySchemes (login.microsoftonline.com), and the
+  Sales MCP server host (agent365.svc.cloud.microsoft). dynamics.microsoft.com answers
+  HTTP 200 with an HTML SPA shell for EVERY /.well-known/* path — those are recorded as
+  soft-200 misses, not documents.
+hosts:
+- host: https://www.microsoft.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    file: microsoft-dynamics-365-sales-security.txt
+    document: true
+  - path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - path: /.well-known/agent.json
+    status: 404
+    document: false
+- host: https://login.microsoftonline.com
+  note: >-
+    Microsoft Entra ID authority; this is the authorizationUrl/tokenUrl host declared in
+    the Dataverse Web API oauth2 securityScheme, so it is the OIDC discovery surface an
+    agent must read to authenticate against Dynamics 365 Sales.
+  documents:
+  - path: /common/v2.0/.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: microsoft-dynamics-365-sales-openid-configuration.json
+    document: true
+  - path: /common/.well-known/oauth-authorization-server
+    status: 404
+    document: false
+- host: https://learn.microsoft.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    document: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - path: /.well-known/agent.json
+    status: 404
+    document: false
+  - path: /llms.txt
+    status: 404
+    document: false
+- host: https://dynamics.microsoft.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    document: false
+    note: soft-200 — SPA catch-all returns the marketing HTML shell, not a security.txt
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    document: false
+    note: soft-200 — HTML shell, rejected as an agent card
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    document: false
+    note: soft-200 — HTML shell, rejected as an agent card
+- host: https://agent365.svc.cloud.microsoft
+  note: Dynamics 365 Sales MCP server host; every path requires a valid environment id.
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 400
+    document: false
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+    document: false
+  - path: /.well-known/agent-card.json
+    status: 400
+    document: false
+  - path: /.well-known/agent.json
+    status: 400
+    document: false
+summary:
+  paths_probed: 22
+  real_documents: 2
+  soft_200_misses: 3

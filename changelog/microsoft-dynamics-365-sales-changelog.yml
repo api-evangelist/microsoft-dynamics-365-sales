@@ -1,0 +1,114 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/dynamics365/release-plan/2026wave1/sales/dynamics365-sales/planned-features
+docs:
+- https://learn.microsoft.com/en-us/dynamics365/release-plans/
+- https://learn.microsoft.com/en-us/dynamics365/release-plan/2026wave1/sales/dynamics365-sales/planned-features
+- https://learn.microsoft.com/en-us/dynamics365/release-plan/2025wave2/sales/dynamics365-sales/planned-features
+- https://learn.microsoft.com/en-us/power-platform/important-changes-coming
+scheme:
+  product: release waves — two per calendar year, each with a published plan naming public
+    preview and general availability dates per feature
+  api: uri-path version, current v9.2 (see lifecycle/)
+current_version: 2026 release wave 1
+current_window: April 2026 through September 2026
+last_updated_upstream: '2026-08-12'
+note: >-
+  Microsoft does not publish a dated API changelog for the Dataverse Web API itself. The
+  authoritative dated change record for Dynamics 365 Sales is the release-plan feature table,
+  which carries a public-preview date and a general-availability date per feature. Recent
+  window only; the plan page is the source of truth.
+
+entries:
+- date: '2026-08'
+  version: 2026 release wave 1
+  area: Lead management
+  highlight: Prioritize your hottest leads first with next best actions
+  stage: public preview
+  breaking: false
+- date: '2026-08'
+  version: 2026 release wave 1
+  area: Lead management
+  highlight: Deploy multiple Sales Qualification Agents in a single environment
+  stage: public preview (GA Sep 2026)
+  breaking: false
+- date: '2026-08'
+  version: 2026 release wave 1
+  area: Sales management and operations
+  highlight: Plan your sales portfolio with Sales Research Agent
+  stage: general availability
+  breaking: false
+- date: '2026-07'
+  version: 2026 release wave 1
+  area: Copilot and AI innovation
+  highlight: Redesigned Opportunity Research helps sellers understand deals faster
+  stage: public preview and general availability
+  breaking: false
+- date: '2026-07'
+  version: 2026 release wave 1
+  area: Opportunity acceleration
+  highlight: Stay updated with delta-first guidance in Sales Opportunity Agent
+  stage: public preview and general availability
+  breaking: false
+- date: '2026-07'
+  version: 2026 release wave 1
+  area: Seller experiences
+  highlight: Enrich opportunity data with AI-powered meeting intelligence
+  stage: general availability
+  breaking: false
+- date: '2026-06-25'
+  version: 2026 release wave 1
+  area: Seller experiences
+  highlight: Copy opportunities for repeat deals
+  stage: public preview (GA Aug 2026)
+  breaking: false
+- date: '2026-06-15'
+  version: 2026 release wave 1
+  area: Copilot and AI innovation
+  highlight: Use Dynamics 365 Sales skills in Microsoft 365 Copilot Cowork
+  stage: general availability
+  breaking: false
+- date: '2026-05-30'
+  version: 2026 release wave 1
+  area: Sales engagement and execution
+  highlight: Reduce seller friction in Sequences with in-flow email template picker
+  stage: general availability
+  breaking: false
+- date: '2026-04-30'
+  version: 2026 release wave 1
+  area: Copilot and AI innovation
+  highlight: >-
+    Find, filter and sort using natural language with smart grid; Visualize with Copilot;
+    form fill assist toolbar; smart paste
+  stage: general availability
+  breaking: false
+- date: '2026-04-15'
+  version: 2026 release wave 1
+  area: Opportunity acceleration
+  highlight: Uncover insights and risks to close more deals with Opportunity Research Agent
+  stage: general availability
+  breaking: false
+- date: '2026-04-15'
+  version: 2026 release wave 1
+  area: Copilot and AI innovation
+  highlight: Create records in Dynamics 365 Sales using Sales agent
+  stage: public preview (GA Sep 2026)
+  breaking: false
+- date: '2026-04-11'
+  version: 2026 release wave 1
+  area: Copilot and AI innovation
+  highlight: Generate debug reports for Copilot in Dynamics 365 Sales
+  stage: general availability
+  breaking: false
+- date: '2026-04-02'
+  version: 2026 release wave 1
+  area: Sales management and operations
+  highlight: Reduce risk with Next Best Action in Sales Close Agent
+  stage: public preview
+  breaking: false
+
+breaking_changes_feed:
+  url: https://learn.microsoft.com/en-us/power-platform/important-changes-coming
+  note: >-
+    Removals and deprecations that affect developers are announced here rather than in the
+    release plan. See lifecycle/microsoft-dynamics-365-sales-lifecycle.yml.

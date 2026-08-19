@@ -1,0 +1,169 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors
+docs:
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/reference/web-service-error-codes
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits
+format: odata-error
+rfc9457: false
+format_note: >-
+  Dataverse does NOT use RFC 9457 application/problem+json. It returns the OData v4 error
+  envelope as application/json. There is no `type` URI, no `title`, and no `instance`.
+envelope:
+  shape: '{"error": {"code": "<hex code, frequently empty>", "message": "<description>"}}'
+  content_type: 'application/json; odata.metadata=minimal'
+  caveat: >-
+    Learn, verbatim — the code is "not related to the http status code and is frequently
+    empty". Branch on HTTP status; treat error.code as a hint.
+  optional_annotations:
+  - name: '@Microsoft.PowerApps.CDS.ErrorDetails.OperationStatus'
+    meaning: OperationStatus value set by a plug-in's InvalidPluginExecutionException
+  - name: '@Microsoft.PowerApps.CDS.ErrorDetails.SubErrorCode'
+    meaning: custom integer error code set by a plug-in
+  - name: '@Microsoft.PowerApps.CDS.HelpLink'
+    meaning: a URL that might carry guidance for the error (not guaranteed for every error)
+  - name: '@Microsoft.PowerApps.CDS.TraceText'
+    meaning: plug-in trace log content, including a stack trace when the plug-in author logged one
+  - name: '@Microsoft.PowerApps.CDS.InnerError.Message'
+    meaning: the inner-error message
+  enable_with: 'Prefer: odata.include-annotations="*"'
+
+problems:
+- status: 400
+  name: BadRequest
+  title: An argument is invalid
+  retryable: false
+  remediation: Fix the request payload, query option or URL before retrying.
+  sub_cases:
+  - code: '0x80060888'
+    number: '-2147088248'
+    message: 'Invalid URI: The Uri string is too long.'
+    cause: URL exceeded 32 KB (65 KB inside $batch)
+    remediation: Move the query into a $batch body, or use FetchXml within $batch.
+  - message: Invalid URL
+    cause: a single OData segment exceeded 260 characters
+    remediation: Use parameter aliases — /MyApi(MyParameter=@alias)?@alias='longvalue'
+- status: 401
+  name: Unauthorized
+  title: Authentication failed or the token is not valid
+  retryable: false
+  retry_after_reauth: true
+  error_types:
+  - BadAuthTicket
+  - ExpiredAuthTicket
+  - InsufficientAuthTicket
+  - InvalidAuthTicket
+  - InvalidUserAuth
+  - MissingCrmAuthenticationToken
+  - MissingCrmAuthenticationTokenOrganizationName
+  - RequestIsNotAuthenticated
+  - TamperedAuthTicket
+  - UnauthorizedAccess
+  - UnManagedInvalidSecurityPrincipal
+  remediation: Acquire a fresh Microsoft Entra ID bearer token for the environment resource.
+- status: 403
+  name: Forbidden
+  title: The caller lacks the privilege for this operation
+  retryable: false
+  error_types:
+  - AccessDenied
+  - AttributePermissionReadIsMissing
+  - AttributePermissionUpdateIsMissingDuringUpdate
+  - AttributePrivilegeCreateIsMissing
+  - CannotActOnBehalfOfAnotherUser
+  - CannotAddOrActonBehalfAnotherUserPrivilege
+  - CrmSecurityError
+  - InvalidAccessRights
+  - PrincipalPrivilegeDenied
+  - PrivilegeCreateIsDisabledForOrganization
+  - PrivilegeDenied
+  - unManagedinvalidprincipal
+  - unManagedinvalidprivilegeedepth
+  remediation: >-
+    Grant the security role / table or column privilege in the environment. Retrying with
+    the same principal will not succeed.
+- status: 404
+  name: Not Found
+  title: The resource doesn't exist
+  retryable: false
+  also_returned_when: 'a PATCH carried If-Match: * and the record was absent (upsert create prevented)'
+  source_operations:
+  - openapi/microsoft-dynamics-365-sales-accounts-api-openapi.yml#accounts_get
+  - openapi/microsoft-dynamics-365-sales-contacts-api-openapi.yml#contacts_get
+  - openapi/microsoft-dynamics-365-sales-leads-api-openapi.yml#leads_get
+  - openapi/microsoft-dynamics-365-sales-opportunities-api-openapi.yml#opportunities_get
+- status: 405
+  name: Method Not Allowed
+  title: Incorrect method and resource combination
+  retryable: false
+  error_types: [CannotDeleteDueToAssociation, InvalidOperation, NotSupported]
+  example: DELETE or PATCH against a collection of entities
+- status: 412
+  name: Precondition Failed
+  title: The precondition on the conditional request was not met
+  retryable: conditional
+  error_types: [ConcurrencyVersionMismatch, DuplicateRecord]
+  messages:
+  - "The version of the existing record doesn't match the RowVersion property provided."
+  - 'A record with matching key values already exists.'
+  remediation: >-
+    Re-read the record, re-evaluate whether the write is still wanted, then retry with the
+    fresh @odata.etag. This is the optimistic-concurrency signal, not a transient failure.
+- status: 413
+  name: Payload Too Large
+  title: The request length is too large
+  retryable: false
+  remediation: Split the payload; see request/response payload size limitations.
+- status: 429
+  name: Too Many Requests
+  title: Service protection API limit exceeded
+  retryable: true
+  retry_signal: Retry-After header (seconds)
+  sub_cases:
+  - code: '0x80072322'
+    number: '-2147015902'
+    message: Number of requests exceeded the limit of 6000 over time window of 300 seconds.
+  - code: '0x80072321'
+    number: '-2147015903'
+    message: >-
+      Combined execution time of incoming requests exceeded limit of 1,200,000 milliseconds
+      over time window of 300 seconds.
+  - code: '0x80072326'
+    number: '-2147015898'
+    message: Number of concurrent requests exceeded the limit of 52.
+  see: rate-limits/microsoft-dynamics-365-sales-rate-limits.yml
+- status: 501
+  name: Not Implemented
+  title: The requested operation isn't implemented
+  retryable: false
+- status: 503
+  name: Service Unavailable
+  title: The Web API service isn't available
+  retryable: true
+  remediation: Back off and retry; check https://status.cloud.microsoft/
+
+success_codes:
+- status: 200
+  meaning: operation returns data in the response body
+- status: 201
+  meaning: 'entity POST succeeded with Prefer: return=representation'
+- status: 204
+  meaning: operation succeeded with no response body (the default for POST and PATCH)
+- status: 304
+  meaning: 'conditional retrieval — record unchanged since the ETag in If-None-Match'
+
+error_code_registry:
+  url: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/reference/web-service-error-codes
+  probed_status: 200
+  note: >-
+    Microsoft publishes a full hexadecimal Dataverse web service error code registry
+    (0x8004xxxx / 0x8006xxxx / 0x8007xxxx families). It is thousands of entries and is not
+    transcribed here; the URL is the authoritative lookup and the codes surfaced above are
+    the ones the Web API documentation names explicitly.
+
+derived_from:
+  openapi_responses: >-
+    The refined OpenAPI files in openapi/ declare 200/201/204 success responses only; every
+    4xx/5xx entry above comes from Microsoft's own status-code table rather than from the
+    spec, which is why this file is method: searched rather than derived.

@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "fc3c3fc0-4a1c-4c70-9072-f1bfe0192a13",
+      "name": "$batch",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff6c933a-4681-4386-8e0f-e163e8f1c7b8",
+          "name": "Execute a batch of OData operations",
+          "request": {
+            "name": "Execute a batch of OData operations",
+            "description": {},
+            "url": {
+              "path": [
+                "$batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/mixed"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "50e25cc6-a17b-4355-8dc5-5a4998d0bcc5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "$batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Dataverse organization (environment) prefix",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "contoso",
+      "key": "org"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org}}.api.crm.dynamics.com/api/data/v9.2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://{org}.api.crm.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "60671322-fef2-41fc-9894-07dbb9d8638b",
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts $batch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OData v4 RESTful Web API for Microsoft Dataverse, the platform behind\nDynamics 365 Sales. Used to create, read, update, and delete Dynamics\n365 Sales records (accounts, contacts, leads, opportunities, quotes,\norders, invoices, products, tasks) and to invoke bound and unbound\nactions and functions. Authentication uses OAuth 2.0 bearer tokens\nissued by Microsoft Entra ID; the endpoint is per-environment, for\nexample https://{org}.api.crm.dynamics.com/api/data/v9.2/.\n\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

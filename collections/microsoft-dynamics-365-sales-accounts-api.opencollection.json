@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts API",
+    "version": "v9.2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts",
+            "headers": [
+              {
+                "name": "OData-MaxVersion",
+                "value": ""
+              },
+              {
+                "name": "OData-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query accounts"
+        },
+        {
+          "info": {
+            "name": "Create an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts",
+            "headers": [
+              {
+                "name": "OData-MaxVersion",
+                "value": ""
+              },
+              {
+                "name": "OData-Version",
+                "value": ""
+              },
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an account"
+        },
+        {
+          "info": {
+            "name": "Get an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts(:accountid)",
+            "params": [
+              {
+                "name": "accountid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get an account"
+        },
+        {
+          "info": {
+            "name": "Update an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts(:accountid)",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an account"
+        },
+        {
+          "info": {
+            "name": "Delete an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/accounts(:accountid)",
+            "params": [
+              {
+                "name": "accountid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

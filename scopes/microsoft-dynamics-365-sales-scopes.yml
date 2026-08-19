@@ -1,9 +1,21 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/microsoft-dynamics-365-sales-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/_original/microsoft-dynamics-365-sales-openapi.yml
+docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth
+docs_additional:
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory
+- https://learn.microsoft.com/en-us/power-platform/admin/manage-application-users
+note: >-
+  Dataverse does not publish a granular scope catalogue. There are exactly two token scopes,
+  both resource-relative to the environment URL, and authorization is enforced downstream by
+  the Dataverse security model (security roles, table and column privileges) rather than by
+  scope strings. Anything finer-grained than the two scopes below is a security role, not an
+  OAuth scope — see permission_model.
+
+authority: https://login.microsoftonline.com
 schemes:
 - name: oauth2
-  source: openapi/microsoft-dynamics-365-sales-openapi.yml
+  source: openapi/_original/microsoft-dynamics-365-sales-openapi.yml
   flows:
   - flow: authorizationCode
     authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
@@ -11,11 +23,57 @@ schemes:
   - flow: clientCredentials
     tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
   description: Microsoft Entra ID OAuth 2.0 bearer token
+
 scopes:
-- scope: https://{org}.api.crm.dynamics.com/.default
-  description: Dataverse environment access
-  flows:
-  - authorizationCode
-  - clientCredentials
-  sources:
-  - openapi/microsoft-dynamics-365-sales-openapi.yml
+- scope: '{environment-url}/user_impersonation'
+  example: https://contoso.api.crm.dynamics.com/user_impersonation
+  description: >-
+    Delegated — act on Dataverse as the signed-in user. Learn, verbatim — "use a
+    '<environment-url>/user_impersonation' scope for a public client."
+  client_type: public
+  flows: [authorizationCode]
+  entra_permission: Access Dynamics 365 as organization users
+  sources: [https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth]
+- scope: '{environment-url}/.default'
+  example: https://contoso.api.crm.dynamics.com/.default
+  description: >-
+    Application / server-to-server — all statically consented permissions for the resource.
+    Learn, verbatim — "For a confidential client, use a scope of
+    '<environment-url>/.default'."
+  client_type: confidential
+  flows: [clientCredentials]
+  requires: >-
+    a Dataverse application user bound to the Entra app registration, assigned a custom
+    security role. Does not consume a paid licence.
+  sources: [https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth]
+
+resource_url_forms:
+- https://{org}.api.crm.dynamics.com
+- https://{org}.crm.dynamics.com
+- note: >-
+    Both forms appear in Microsoft's own samples on the same page — the .api. host in the
+    MSAL scope example and the bare host in the ServiceClient connection-string examples.
+    The region segment varies by datacenter (crm for North America, crm2 South America,
+    crm7 Japan and so on), so the scope string is tenant- and region-specific. Read the
+    exact value from Power Apps -> Settings -> Developer resources.
+
+permission_model:
+  kind: role-based, enforced by Dataverse after the token is validated
+  layers:
+  - security roles (assigned to the user or application user)
+  - table (entity) privileges: create, read, write, delete, append, append-to, assign, share
+  - privilege depth: user, business unit, parent-child business unit, organization
+  - column-level security for individual fields
+  impersonation:
+    header: CallerObjectId
+    note: requires the caller to hold the impersonation privilege
+  docs: https://learn.microsoft.com/en-us/power-platform/admin/database-security
+  implication_for_agents: >-
+    A token scope tells you nothing about what an agent may do here. Two callers holding the
+    identical `.default` scope can have completely different effective access. Least
+    privilege is configured as a custom security role on the application user, not as a
+    narrower scope.
+
+credentials_for_confidential_clients:
+- client secret
+- X.509 certificate (.cer, .pem, .crt public key upload; thumbprint on the client)

@@ -1,0 +1,132 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  mcp/microsoft-dynamics-365-sales-mcp.yml (tool list transcribed from Microsoft Learn)
+  bound against the operationIds in openapi/microsoft-dynamics-365-sales-*-openapi.yml
+note: >-
+  The headline finding is a clean surface split. The Dynamics 365 Sales MCP server exposes
+  NO CRUD tools — all 20 of its tools are AI/insight actions (msdyn_* Dataverse custom
+  actions and Sales Qualification / Sales Opportunity agent capabilities) with no
+  equivalent operation in the Dataverse Web API OData surface. CRUD over Sales records is
+  a DIFFERENT server (the Dataverse MCP server at https://{org}.api.crm.dynamics.com/api/mcp),
+  which Learn tells you to connect alongside it. So the crosswalk[] here is empty by
+  construction, not by omission: mcp_only[] carries all 20 tools and rest_only[] carries
+  every OpenAPI operation. Recording this is the point — an agent that connects only the
+  Sales MCP server can read insights but cannot create a lead.
+
+surfaces:
+  openapi:
+    files:
+    - openapi/microsoft-dynamics-365-sales-accounts-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-contacts-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-leads-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-opportunities-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-quotes-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-salesorders-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-invoices-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-products-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-tasks-api-openapi.yml
+    - openapi/microsoft-dynamics-365-sales-batch-api-openapi.yml
+    base: https://{org}.api.crm.dynamics.com/api/data/v9.2
+    gated: true
+    gate: per-tenant environment + Microsoft Entra ID bearer token
+  graphql:
+    endpoint: null
+    note: Microsoft publishes no GraphQL surface for Dynamics 365 Sales or Dataverse.
+  mcp:
+    url: https://agent365.svc.cloud.microsoft/mcp/environments/{EnvironmentID}/servers/msdyn_SalesMCPServer
+    gated: true
+    gate: 'tools/list returned HTTP 400 EndpointInvalid without a real tenant environment id'
+  mcp_secondary:
+    url: https://{org}.api.crm.dynamics.com/api/mcp
+    name: Dataverse MCP server
+    gated: true
+    note: >-
+      This is where CRUD tools live. Its tool list is documented separately at
+      https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-mcp
+      and is not transcribed here because it belongs to the Dataverse platform profile,
+      not to Dynamics 365 Sales.
+
+crosswalk: []
+
+mcp_only:
+- tool: get_lead_research
+  reason: Sales Qualification Agent insight action; no public REST operation.
+- tool: get_account_research
+  reason: Sales Qualification Agent insight action; no public REST operation.
+- tool: get_competitor_research
+  reason: Sales Qualification Agent insight action; no public REST operation.
+- tool: get_engage_summary
+  reason: Sales Qualification Agent insight action; no public REST operation.
+- tool: get_lead_qualification_assessment
+  reason: Sales Qualification Agent scoring action; no public REST operation.
+- tool: draft_outreach_email
+  reason: Generative composition action; no public REST operation.
+- tool: get_key_opportunity_insights
+  reason: msdyn_GetKeyOpportunityInsights is a Dataverse unbound custom action, not an OData entity operation.
+- tool: get_key_opportunity_signals
+  reason: msdyn_GetKeyOpportunitySignals is a Dataverse unbound custom action.
+- tool: get_key_opportunity_stakeholders
+  reason: msdyn_GetKeyOpportunityStakeholders is a Dataverse unbound custom action.
+- tool: get_opportunity_health
+  reason: msdyn_GetOpportunityHealth is a Dataverse unbound custom action (MEDDPICC scoring).
+- tool: get_opportunity_pain_points_and_needs
+  reason: msdyn_GetOpportunityPainPointsAndNeeds is a Dataverse unbound custom action.
+- tool: get_opportunity_top_risks
+  reason: msdyn_GetOpportunityTopRisks is a Dataverse unbound custom action.
+- tool: get_opportunity_deal_overview
+  reason: msdyn_GetOpportunityResearchResult is a Dataverse unbound custom action.
+- tool: get_customer_updates
+  reason: >-
+    msdyn_GetInsights returns a cross-entity "changed since last login" digest. It is
+    adjacent to accounts_list / leads_list / opportunities_list but is not backed by them —
+    it is a server-side composite with no parameters and no OData equivalent.
+- tool: get_sales_record_summary
+  reason: msdyn_SalesRecordSummary is a generative summarisation action over admin-configured fields.
+- tool: get_sales_lead_catchup
+  reason: msdyn_SalesLeadCatchup is a delta/summarisation action; leads_get returns raw fields, not a catchup.
+- tool: get_sales_account_catchup
+  reason: msdyn_SalesAccountCatchup is a delta/summarisation action.
+- tool: get_sales_opportunity_catchup
+  reason: msdyn_SalesOpportunityCatchup is a delta/summarisation action.
+- tool: get_sharepoint_search_results
+  reason: Searches SharePoint, not Dataverse; outside the Web API surface entirely.
+- tool: get_answer_from_sharepoint_documents
+  reason: Generative Q&A over SharePoint; outside the Web API surface entirely.
+
+rest_only:
+- capability: Accounts
+  operations: [accounts_list, accounts_get, accounts_create, accounts_update, accounts_delete]
+  note: >-
+    Reachable through the Dataverse MCP server's generic CRUD tools, not through the Sales
+    MCP server.
+- capability: Contacts
+  operations: [contacts_list, contacts_get, contacts_create, contacts_update, contacts_delete]
+- capability: Leads
+  operations: [leads_list, leads_get, leads_create, leads_update, leads_delete]
+- capability: Opportunities
+  operations: [opportunities_list, opportunities_get, opportunities_create, opportunities_update, opportunities_delete]
+- capability: Quotes
+  operations: [quotes_list, quotes_create]
+- capability: SalesOrders
+  operations: [salesorders_list, salesorders_create]
+- capability: Invoices
+  operations: [invoices_list, invoices_create]
+- capability: Products
+  operations: [products_list, products_create]
+- capability: Tasks
+  operations: [tasks_list, tasks_create]
+- capability: Batch
+  operations: [batch_execute]
+
+coverage:
+  tools_named: 20
+  tools_bound_to_rest: 0
+  mcp_only: 20
+  rest_operations_total: 31
+  rest_operations_with_a_tool: 0
+  confidence: high
+  interpretation: >-
+    Zero overlap. The MCP surface and the REST surface are disjoint projections of the same
+    Sales data core — insights vs records. Neither is a superset of the other, and an
+    integrator needs both.

@@ -1,0 +1,72 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing
+docs:
+- https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing
+- https://go.microsoft.com/fwlink/?LinkId=866544
+note: >-
+  Prices are per named user per month, quoted in USD, billed annually, as published on the
+  Dynamics 365 Sales pricing page. Licensing is seat-based; there is no metered API plan.
+  API consumption is governed separately by Dataverse entitlement limits attached to the
+  license (see rate-limits/) and by Copilot Studio credits for the MCP/agent tools.
+currency: USD
+billing_period: monthly, paid yearly
+plan_count: 4
+
+plans:
+- name: Dynamics 365 Sales Professional
+  price: 65.00
+  currency: USD
+  period: user/month, paid yearly
+  includes:
+  - Core sales force automation
+  - Microsoft 365 interoperation
+  - Reporting and dashboards
+  - Mobile app
+  - Custom apps
+  - Conversation intelligence with included capacity
+- name: Dynamics 365 Sales Enterprise Edition
+  price: 105.00
+  currency: USD
+  period: user/month, paid yearly
+  includes:
+  - Everything in Sales Professional
+  - Advanced sales force automation
+  - Sales engagement with included capacity
+  - Advanced sales engagement
+  - Copilot capabilities in Dynamics 365, Outlook and Teams
+- name: Dynamics 365 Sales Premium
+  price: 150.00
+  currency: USD
+  period: user/month, paid yearly
+  includes:
+  - Everything in Sales Enterprise
+  - 1,000 Copilot Credits
+  - Sales Insights
+  - AI-powered recommended actions
+  - AI-powered data enrichment
+- name: Microsoft Relationship Sales
+  price: null
+  currency: USD
+  period: user/month
+  contact_sales: true
+  minimum_seats: 10
+  includes:
+  - Dynamics 365 Sales Enterprise
+  - LinkedIn Sales Navigator
+  note: Price is not published; the page requires contact and states a 10-seat minimum.
+
+trial:
+  available: true
+  name: Dynamics 365 Sales free trial
+  url: https://dynamics.microsoft.com/en-us/sales/overview/
+  note: 'The pricing page offers "try for free".'
+
+add_ons:
+- name: Copilot Credits
+  model: pre-purchase or pay-as-you-go
+  requires: an Azure subscription
+  note: >-
+    The MCP/agent tool surface bills against Copilot Studio credits per invocation. Learn,
+    verbatim — "Copilot credits are not charged for specific Dynamics 365 Sales licenses."
+  docs: https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management

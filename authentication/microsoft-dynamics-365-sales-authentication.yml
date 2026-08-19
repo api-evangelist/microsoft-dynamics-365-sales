@@ -1,23 +1,115 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/microsoft-dynamics-365-sales-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/_original/microsoft-dynamics-365-sales-openapi.yml
+docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth
+docs_additional:
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory
+- https://learn.microsoft.com/en-us/power-platform/admin/manage-application-users
 summary:
-  types:
-  - oauth2
-  oauth2_flows:
-  - authorizationCode
-  - clientCredentials
+  types: [oauth2]
+  api_key_in: []
+  oauth2_flows: [authorizationCode, clientCredentials]
+  identity_provider: Microsoft Entra ID
+  transport: 'Authorization: Bearer <access token>'
+  statement: >-
+    Learn, verbatim — "Client applications must support the use of OAuth to access data by
+    using the Web API." There is no API-key, basic-auth or legacy option; the Office365
+    authentication type is deprecated.
+
 schemes:
 - name: oauth2
   type: oauth2
+  description: Microsoft Entra ID OAuth 2.0 bearer token
   flows:
   - flow: authorizationCode
     authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
     tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
     scopes: 1
+    scope: '{environment-url}/user_impersonation'
+    client_type: public
   - flow: clientCredentials
     tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
     scopes: 1
-  description: Microsoft Entra ID OAuth 2.0 bearer token
+    scope: '{environment-url}/.default'
+    client_type: confidential
   sources:
-  - openapi/microsoft-dynamics-365-sales-openapi.yml
+  - openapi/_original/microsoft-dynamics-365-sales-openapi.yml
+
+discovery:
+  openid_configuration: https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
+  probed_status: 200
+  saved: well-known/microsoft-dynamics-365-sales-openid-configuration.json
+  issuer: 'https://login.microsoftonline.com/{tenantid}/v2.0'
+  oauth_authorization_server_metadata: 404
+  note: >-
+    The OIDC discovery document is served; RFC 8414 /.well-known/oauth-authorization-server
+    is not.
+
+registration:
+  required: true
+  where: Microsoft Entra ID tenant
+  app_types:
+  - type: Web app / API
+    subtypes: [web client, user-agent-based client (SPA)]
+    requires: Sign-On URL
+  - type: Native
+    requires: 'Redirect URI, typically app://<guid>'
+  delegated_permission: Access Dynamics 365 as organization users
+  docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory
+
+server_to_server:
+  supported: true
+  mechanism: application user bound to an Entra app registration
+  credentials: [client secret, X.509 certificate]
+  licence: 'does not consume a paid user licence'
+  requires:
+  - a registered Entra app
+  - a Dataverse application user bound to it
+  - a custom security role assigned to that user
+  note: >-
+    Learn, verbatim — "While you could achieve these scenarios by using credentials for an
+    ordinary user, that user account needs a paid license. Don't use this approach."
+
+token:
+  lifetime: 'approximately 60 minutes (default)'
+  refresh: handled by MSAL token cache; re-acquire per request via a DelegatingHandler
+  library: Microsoft Authentication Library (MSAL)
+  deprecated_library: ADAL — 'isn''t actively receiving updates and is supported only until June 2022'
+
+client_handling:
+- client: Microsoft.PowerPlatform.Dataverse.Client ServiceClient
+  auth_library: MSAL
+  note: recommended; also handles 429 Retry-After automatically
+- client: Microsoft.Xrm.Tooling.Connector CrmServiceClient
+  auth_library: ADAL
+  note: legacy
+- client: PowerPlatform-Dataverse-Client (Python)
+  auth_library: azure-identity TokenCredential (InteractiveBrowserCredential, ClientSecretCredential, CertificateCredential, AzureCliCredential)
+
+impersonation:
+  header: CallerObjectId
+  value: Microsoft Entra ID Object ID of the user to impersonate
+  requires: caller holds the impersonation privilege
+  docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/impersonate-another-user-web-api
+
+authorization_note: >-
+  A valid token is necessary but not sufficient. Effective access is decided by the
+  Dataverse security model — security roles, table and column privileges, privilege depth.
+  See scopes/microsoft-dynamics-365-sales-scopes.yml.
+
+failure_modes:
+  401:
+  - BadAuthTicket
+  - ExpiredAuthTicket
+  - InsufficientAuthTicket
+  - InvalidAuthTicket
+  - InvalidUserAuth
+  - RequestIsNotAuthenticated
+  - TamperedAuthTicket
+  403:
+  - AccessDenied
+  - PrivilegeDenied
+  - PrincipalPrivilegeDenied
+  - CannotActOnBehalfOfAnotherUser
+  see: errors/microsoft-dynamics-365-sales-problem-types.yml

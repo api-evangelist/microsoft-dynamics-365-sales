@@ -1,0 +1,26 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Authored by API Evangelist from the operationIds in openapi/ and Microsoft's published
+  Dataverse Web API and Dynamics 365 Sales MCP documentation. Microsoft publishes no
+  AGENTS.md or skill files for Dynamics 365 Sales itself; the PowerPlatform-Dataverse-Client
+  Python SDK does ship two Claude Agent Skills (dataverse-sdk-use, dataverse-sdk-dev),
+  installed with `dataverse-install-claude-skill` — those are SDK-development skills, not
+  API-operation skills, and are recorded in packages/ rather than duplicated here.
+skills:
+- file: microsoft-dynamics-365-sales-lead-to-opportunity.md
+  name: Capture and advance a Dynamics 365 Sales lead
+  api: openapi/microsoft-dynamics-365-sales-leads-api-openapi.yml
+  operations: [leads_create, leads_get, leads_list, leads_update, opportunities_create, opportunities_get]
+- file: microsoft-dynamics-365-sales-quote-to-invoice.md
+  name: Move a Dynamics 365 Sales deal from quote to invoice
+  api: openapi/microsoft-dynamics-365-sales-quotes-api-openapi.yml
+  operations: [opportunities_get, quotes_create, quotes_list, salesorders_create, salesorders_list, invoices_create, invoices_list, products_list]
+- file: microsoft-dynamics-365-sales-mcp-sales-insights.md
+  name: Use the Dynamics 365 Sales MCP server for deal insight
+  api: mcp/microsoft-dynamics-365-sales-mcp.yml
+  operations: [get_lead_research, get_lead_qualification_assessment, draft_outreach_email, get_account_research, get_competitor_research, get_engage_summary, get_opportunity_health, get_opportunity_top_risks, get_opportunity_deal_overview, get_customer_updates]
+- file: microsoft-dynamics-365-sales-bulk-sync.md
+  name: Bulk read and sync Dynamics 365 Sales data without tripping service protection
+  api: openapi/microsoft-dynamics-365-sales-accounts-api-openapi.yml
+  operations: [accounts_list, contacts_list, opportunities_list, leads_list, batch_execute]

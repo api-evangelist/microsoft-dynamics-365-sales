@@ -1,0 +1,88 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/use-webhooks
+docs:
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/event-framework
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/use-webhooks
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/register-web-hook
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/test-webhook-registration
+spec_type: none
+asyncapi_published: false
+asyncapi_note: >-
+  Microsoft publishes no AsyncAPI document for Dynamics 365 Sales or Dataverse. The event
+  surface below is real and documented in prose; it is captured as a webhook catalogue rather
+  than fabricated into an AsyncAPI spec.
+
+event_surface:
+  name: Microsoft Dataverse Event Framework
+  model: >-
+    Register an external handler against a table + message (event) combination. Dataverse
+    posts the execution context to the registered endpoint. Because Dynamics 365 Sales
+    records are Dataverse tables, every Sales entity (lead, opportunity, account, contact,
+    quote, salesorder, invoice, product, task) is an event source.
+  channels:
+  - type: webhook
+    transport: HTTPS POST
+    payload: 'JSON serialisation of the RemoteExecutionContext class'
+    ports: 'HTTP port 80 and HTTPS port 443 only'
+    registration: >-
+      Plug-in Registration Tool -> "Register New WebHook". Registrations are stored in the
+      ServiceEndpoint table with Contract value 8, so the registered set is itself queryable
+      over the Web API.
+    authentication_options:
+    - option: WebhookKey
+      note: >-
+        Key passed on the query string with the name `code` — the shape Azure Functions
+        expects.
+    - option: HttpHeader
+      note: One or more static headers agreed with the endpoint owner.
+    - option: HttpQueryString
+      note: One or more static query-string parameters.
+  - type: azure-service-bus
+    transport: Azure Service Bus queue/topic
+    payload: RemoteExecutionContext
+  - type: azure-event-hubs
+    transport: Azure Event Hubs
+    payload: RemoteExecutionContext
+
+event_triggers:
+  messages:
+  - Create
+  - Update
+  - Delete
+  - Associate
+  - Disassociate
+  - and any other Dataverse message a table supports (Qualify, Win, Lose, …)
+  stages:
+  - PreValidation
+  - PreOperation
+  - PostOperation
+  modes:
+  - synchronous
+  - asynchronous
+
+payload:
+  class: RemoteExecutionContext
+  format: JSON string in the request body
+  docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/use-webhooks
+  note: >-
+    Field-level schema is documented on the .NET API reference for RemoteExecutionContext
+    rather than as a machine-readable schema, so no schema is transcribed here.
+
+change_tracking:
+  alternative: 'Prefer: odata.track-changes'
+  note: >-
+    A pull-based delta alternative to webhooks — Dataverse change tracking returns what
+    changed since the last synchronisation token, which is often the better fit for an agent
+    that cannot host a public endpoint.
+  docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/use-change-tracking-synchronize-data-external-systems
+
+limits_and_caveats:
+- Only ports 80 and 443 are supported for registered webhook endpoints.
+- >-
+  Webhook and Service Bus registrations are Dataverse platform features and require the
+  Plug-in Registration Tool or the ServiceEndpoint table — there is no self-serve webhook
+  subscription API on the public Web API surface.
+- >-
+  Dataverse does not publish a catalogue of named "webhook event types" the way a SaaS API
+  does; the event set is the cross product of your tables and the messages they support.

@@ -1,0 +1,112 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Registry metadata read unauthenticated from api.nuget.org, pypi.org/pypi/<pkg>/json and
+  registry.npmjs.org, cross-checked against the Microsoft Learn developer documentation
+  that names each package.
+note: >-
+  Dynamics 365 Sales has no product-specific client library. Every first-party client for
+  Dynamics 365 Sales data is a Microsoft Dataverse client — Dataverse is the platform the
+  Sales tables live in and the Web API (https://{org}.api.crm.dynamics.com/api/data/v9.2)
+  is the Dataverse endpoint. All packages below are published by Microsoft.
+packages:
+- language: dotnet
+  registry: nuget
+  name: Microsoft.PowerPlatform.Dataverse.Client
+  url: https://www.nuget.org/packages/Microsoft.PowerPlatform.Dataverse.Client
+  install: dotnet add package Microsoft.PowerPlatform.Dataverse.Client
+  official: true
+  version: 1.2.26
+  published: '2026-07-02'
+  note: >-
+    Current .NET client (ServiceClient). The Learn service-protection-limits guidance names
+    this class as the client that automatically honours the Retry-After duration on 429.
+- language: dotnet
+  registry: nuget
+  name: Microsoft.PowerPlatform.Dataverse.Client.Dynamics
+  url: https://www.nuget.org/packages/Microsoft.PowerPlatform.Dataverse.Client.Dynamics
+  install: dotnet add package Microsoft.PowerPlatform.Dataverse.Client.Dynamics
+  official: true
+  version: 1.2.26
+  published: '2026-07-02'
+- language: dotnet
+  registry: nuget
+  name: Microsoft.CrmSdk.CoreAssemblies
+  url: https://www.nuget.org/packages/Microsoft.CrmSdk.CoreAssemblies
+  install: dotnet add package Microsoft.CrmSdk.CoreAssemblies
+  official: true
+  version: 9.0.2.60
+  published: '2025-10-21'
+  note: Microsoft.Xrm.Sdk core assemblies (IOrganizationService, Entity, messages).
+- language: dotnet
+  registry: nuget
+  name: Microsoft.CrmSdk.XrmTooling.CoreAssembly
+  url: https://www.nuget.org/packages/Microsoft.CrmSdk.XrmTooling.CoreAssembly
+  install: dotnet add package Microsoft.CrmSdk.XrmTooling.CoreAssembly
+  official: true
+  version: 9.1.1.65
+  published: '2024-07-13'
+  note: >-
+    Legacy CrmServiceClient. Two years since the last release; Learn now points developers
+    at Microsoft.PowerPlatform.Dataverse.Client instead, and OrganizationServiceProxy is
+    documented as deprecated.
+- language: python
+  registry: pypi
+  name: PowerPlatform-Dataverse-Client
+  url: https://pypi.org/project/PowerPlatform-Dataverse-Client/
+  install: pip install PowerPlatform-Dataverse-Client
+  official: true
+  version: 1.0.0
+  published: '2026-05-29'
+  source_code: https://github.com/microsoft/PowerPlatform-DataverseClient-Python
+  note: >-
+    Dataverse SDK for Python. Wraps the Dataverse Web API; namespaces client.records,
+    client.query, client.tables, client.files, client.dataframe, client.batch. Ships two
+    optional Claude Agent Skills (dataverse-sdk-use, dataverse-sdk-dev) installed via
+    `dataverse-install-claude-skill`.
+- language: javascript
+  registry: npm
+  name: '@microsoft/dataverse'
+  url: https://www.npmjs.com/package/@microsoft/dataverse
+  install: npm install -g @microsoft/dataverse
+  official: true
+  version: 1.0.63
+  published: '2026-08-08'
+  note: >-
+    Registry description verbatim — "CLI tool for Dataverse, including stdio MCP server.
+    Preview." This is the local-stdio MCP distribution recorded in
+    mcp/microsoft-dynamics-365-sales-mcp.yml. Maintainers microsoft1es /
+    microsoft-oss-releases; repo dev.azure.com/dynamicscrm/OneCRM/_git/DataverseCLI.
+- language: dotnet
+  registry: nuget
+  name: Microsoft.PowerApps.CLI
+  url: https://www.nuget.org/packages/Microsoft.PowerApps.CLI
+  install: nuget install Microsoft.PowerApps.CLI
+  official: true
+  version: 2.11.2
+  published: '2026-08-13'
+  note: Microsoft Power Platform CLI (pac) — see cli/microsoft-dynamics-365-sales-cli.yml.
+- language: dotnet
+  registry: nuget
+  name: Microsoft.PowerApps.CLI.Tool
+  url: https://www.nuget.org/packages/Microsoft.PowerApps.CLI.Tool
+  install: dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+  official: true
+  version: 2.11.2
+  published: '2026-08-13'
+registries_checked_with_no_first_party_package:
+- registry: rubygems
+  result: none
+- registry: packagist
+  result: none
+- registry: crates.io
+  result: none
+- registry: maven-central
+  result: none
+- registry: pkg.go.dev
+  result: none
+summary:
+  official_packages: 8
+  languages: [dotnet, python, javascript]
+  freshest_release: '2026-08-13'
+  stalest_release: '2024-07-13'

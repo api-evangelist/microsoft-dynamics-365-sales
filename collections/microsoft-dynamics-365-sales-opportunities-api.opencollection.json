@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Opportunities API",
+    "version": "v9.2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Opportunities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query opportunities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities"
+          },
+          "docs": "Query opportunities"
+        },
+        {
+          "info": {
+            "name": "Create an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an opportunity"
+        },
+        {
+          "info": {
+            "name": "Get an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities(:opportunityid)",
+            "params": [
+              {
+                "name": "opportunityid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an opportunity"
+        },
+        {
+          "info": {
+            "name": "Update an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities(:opportunityid)",
+            "params": [
+              {
+                "name": "opportunityid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an opportunity"
+        },
+        {
+          "info": {
+            "name": "Delete an opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/opportunities(:opportunityid)",
+            "params": [
+              {
+                "name": "opportunityid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an opportunity"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

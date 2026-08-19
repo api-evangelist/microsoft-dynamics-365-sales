@@ -1,0 +1,257 @@
+generated: '2026-08-13'
+method: searched
+status: published
+source: https://learn.microsoft.com/en-us/dynamics365/sales/connect-agents-to-model-context-protocol
+docs:
+- https://learn.microsoft.com/en-us/dynamics365/sales/model-context-protocol-sales-overview
+- https://learn.microsoft.com/en-us/dynamics365/sales/connect-agents-to-model-context-protocol
+- https://learn.microsoft.com/en-us/dynamics365/sales/sales-qualification-agent-tools
+- https://learn.microsoft.com/en-us/dynamics365/sales/sales-close-agent-research-tools
+- https://learn.microsoft.com/en-us/dynamics365/sales/copilot-in-sales-tools
+- https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-mcp
+
+deployment:
+  mode: both
+  endpoint: https://agent365.svc.cloud.microsoft/mcp/environments/{EnvironmentID}/servers/msdyn_SalesMCPServer
+  install: npm install -g @microsoft/dataverse
+  package: https://www.npmjs.com/package/@microsoft/dataverse
+  auth: oauth
+  verified: probed
+  note: >-
+    Microsoft ships BOTH surfaces. (1) REMOTE: the Dynamics 365 Sales MCP server is a
+    hosted HTTP endpoint on agent365.svc.cloud.microsoft, published verbatim in the Learn
+    connect guide; the environment id segment is per-tenant. A live POST of
+    {"jsonrpc":"2.0","id":1,"method":"tools/list"} to the documented placeholder id
+    returned HTTP 400 {"code":"EndpointInvalid","message":"Environment id ... is
+    invalid."} — the endpoint is reachable and answering, the tool schemas are gated
+    behind a real tenant environment id plus Entra ID auth. (2) LOCAL-STDIO: the
+    @microsoft/dataverse npm package describes itself as "CLI tool for Dataverse,
+    including stdio MCP server. Preview." Dataverse also exposes a second remote MCP
+    endpoint at https://{org}.api.crm.dynamics.com/api/mcp for CRUD over Sales records;
+    the Learn guide tells you to connect both servers.
+
+servers:
+- name: dynamics-365-sales-mcp
+  role: sales-agent-tools
+  transport: http
+  url: https://agent365.svc.cloud.microsoft/mcp/environments/{EnvironmentID}/servers/msdyn_SalesMCPServer
+  auth: Microsoft Entra ID (OAuth 2.0)
+  gated: true
+  gate: per-tenant environment id + Entra ID token
+- name: dataverse-mcp
+  role: crud-over-sales-records
+  transport: http
+  url: https://{org}.api.crm.dynamics.com/api/mcp
+  auth: Microsoft Entra ID (OAuth 2.0)
+  gated: true
+  note: >-
+    Must be explicitly enabled per environment for non-Copilot-Studio MCP clients. Learn —
+    "Allow access to Dataverse MCP Server from MCP clients."
+- name: dataverse-cli-stdio
+  role: local-stdio
+  transport: stdio
+  package: '@microsoft/dataverse'
+  install: npm install -g @microsoft/dataverse
+  status: preview
+
+clients:
+  supported:
+  - Microsoft Copilot Studio
+  - GitHub Copilot in Visual Studio Code (MCP: Add Server -> HTTP)
+  unsupported:
+  - name: Claude Desktop
+    note: 'Learn, verbatim — "Claude Desktop isn''t supported at this time."'
+
+prerequisites:
+- Admin permissions in Dynamics 365 Sales
+- Admin permissions in Microsoft Copilot Studio
+- Dataverse MCP server access allowed for the environment (non-Copilot-Studio clients)
+- Sufficient Copilot Studio credits for the tools invoked
+
+tools:
+- name: get_lead_research
+  api_name: mcp_sales-mcp-ser_get_lead_research
+  friendly: Lead research tool
+  category: sales-qualification
+  description: Retrieve detailed lead research and individual prospect analysis
+  parameters: [msdyn_LeadId (string)]
+  returns: Professional background, decision-making authority, preferences
+  billing: Text and generative AI tools (basic)
+- name: get_account_research
+  api_name: mcp_sales-mcp-ser_get_account_research
+  friendly: Account research tool
+  category: sales-qualification
+  description: Retrieve comprehensive account research data
+  parameters: [msdyn_EntityId (guid)]
+  returns: Financial information, company overview, strategic goals, recent news
+  billing: Text and generative AI tools (basic)
+- name: get_competitor_research
+  api_name: mcp_sales-mcp-ser_get_competitor_research
+  friendly: Competitor research tool
+  category: sales-qualification
+  description: Retrieve competitor research and competitive landscape
+  parameters: [msdyn_EntityId (guid)]
+  returns: Competitive threats, market positioning, alternative suppliers
+  billing: Text and generative AI tools (basic)
+- name: get_engage_summary
+  api_name: mcp_sales-mcp-ser_get_engage_summary
+  friendly: Engagement analysis tool
+  category: sales-qualification
+  description: Retrieve engagement summary and interaction history for a lead
+  parameters: [msdyn_LeadId (string)]
+  returns: Engagement patterns, touchpoint analysis, interaction effectiveness
+  billing: Text and generative AI tools (basic)
+- name: get_lead_qualification_assessment
+  api_name: mcp_sales-mcp-ser_get_lead_qualification_assessment
+  friendly: Lead qualification tool
+  category: sales-qualification
+  description: Get comprehensive lead qualification assessment against target customer profile criteria
+  parameters: [LeadId (string)]
+  returns: Target customer profile standards evaluation, qualification ranking, overall assessment
+  billing: Text and generative AI tools (basic)
+- name: draft_outreach_email
+  api_name: mcp_sales-mcp-ser_draft_outreach_email
+  friendly: Outreach email generation tool
+  category: sales-qualification
+  description: Draft personalized sales qualification agent outreach emails
+  parameters: [LeadId (string)]
+  returns: Personalized email subject and body with company-specific insights
+  billing: Text and generative AI tools (basic)
+- name: get_key_opportunity_insights
+  api_name: msdyn_GetKeyOpportunityInsights
+  friendly: Key opportunity insights tool
+  category: sales-opportunity
+  description: Retrieve key insights for the opportunity from Sales Close Agent
+  parameters: [OpportunityId (string)]
+  returns: Summary of the deal's objective, status, and key facts
+  billing: Text and generative AI tools (basic)
+- name: get_key_opportunity_signals
+  api_name: msdyn_GetKeyOpportunitySignals
+  friendly: Key opportunity signals tool
+  category: sales-opportunity
+  description: Retrieve the key signals for the opportunity from Sales Close Agent
+  parameters: [OpportunityId (string)]
+  returns: Most recent developments for the given opportunity
+  billing: Text and generative AI tools (basic)
+- name: get_key_opportunity_stakeholders
+  api_name: msdyn_GetKeyOpportunityStakeholders
+  friendly: Key opportunity stakeholders tool
+  category: sales-opportunity
+  description: Retrieve key stakeholders for the opportunity from Sales Close Agent
+  parameters: [OpportunityId (string)]
+  returns: List of key stakeholders and decision makers for the opportunity
+  billing: Text and generative AI tools (basic)
+- name: get_opportunity_health
+  api_name: msdyn_GetOpportunityHealth
+  friendly: Opportunity health tool
+  category: sales-opportunity
+  description: Retrieve opportunity health from Sales Close Agent
+  parameters: [OpportunityId (string)]
+  returns: >-
+    Health status for the opportunity based on the MEDDPICC framework (Metrics, Economic
+    Buyer, Decision Process, Decision Criteria, Paper Process, Identify Pain, Champion,
+    Competition)
+  billing: Text and generative AI tools (basic)
+- name: get_opportunity_pain_points_and_needs
+  api_name: msdyn_GetOpportunityPainPointsAndNeeds
+  friendly: Opportunity pain points and needs tool
+  category: sales-opportunity
+  description: Retrieve opportunity pain points and needs from Sales Close Agent
+  parameters: [OpportunityId (string)]
+  returns: List of pain points and needs related to the opportunity
+  billing: Text and generative AI tools (basic)
+- name: get_opportunity_top_risks
+  api_name: msdyn_GetOpportunityTopRisks
+  friendly: Opportunity top risks tool
+  category: sales-opportunity
+  description: Retrieve opportunity top risks from Sales Close Agent
+  parameters: [OpportunityId (string)]
+  returns: Top risks for the opportunity based on the risks criteria configured by your admin
+  billing: Text and generative AI tools (basic)
+- name: get_opportunity_deal_overview
+  api_name: msdyn_GetOpportunityResearchResult
+  friendly: Opportunity deal overview tool
+  category: sales-opportunity
+  description: Retrieve all opportunity insights from Sales Close Agent
+  parameters: [OpportunityId (string)]
+  returns: Comprehensive insights for the opportunity
+  billing: Text and generative AI tools (basic)
+- name: get_customer_updates
+  api_name: msdyn_GetInsights
+  friendly: Recent changes tool
+  category: copilot-in-sales
+  description: Retrieve recent changes to leads, accounts, and opportunities owned by the user
+  parameters: []
+  returns: List of leads, accounts, and opportunities that were updated since the user's last login
+  billing: Text and generative AI tools (basic)
+- name: get_sales_record_summary
+  api_name: msdyn_SalesRecordSummary
+  friendly: Sales record summary tool
+  category: copilot-in-sales
+  description: Retrieve record summary for the given record
+  parameters: [RecordId (string)]
+  returns: Summary of the given record based on the fields configured by the admin
+  billing: Generative answer
+- name: get_sales_lead_catchup
+  api_name: msdyn_SalesLeadCatchup
+  friendly: Sales lead catchup tool
+  category: copilot-in-sales
+  description: Retrieve recent lead updates
+  parameters: [LeadId (string)]
+  returns: Recent changes to the given lead record for fields configured by the admin
+  billing: Text and generative AI tools (basic)
+- name: get_sales_account_catchup
+  api_name: msdyn_SalesAccountCatchup
+  friendly: Sales account catchup tool
+  category: copilot-in-sales
+  description: Retrieve recent account updates
+  parameters: [AccountId (string)]
+  returns: Recent changes to the given account record for fields configured by the admin
+  billing: Text and generative AI tools (basic)
+- name: get_sales_opportunity_catchup
+  api_name: msdyn_SalesOpportunityCatchup
+  friendly: Sales opportunity catchup tool
+  category: copilot-in-sales
+  description: Retrieve recent opportunity updates
+  parameters: [OpportunityId (string)]
+  returns: Recent changes to the given opportunity record for fields configured by the admin
+  billing: Text and generative AI tools (basic)
+- name: get_sharepoint_search_results
+  api_name: msdyn_GetDocumentSearchResults
+  friendly: SharePoint search results tool
+  category: copilot-in-sales
+  description: Search SharePoint documents for the given query
+  parameters: [Query (string)]
+  returns: List of documents that contain the given query terms from the configured SharePoint sites
+  billing: Text and generative AI tools (basic)
+- name: get_answer_from_sharepoint_documents
+  api_name: msdyn_SalesAnswerFromDocuments
+  friendly: SharePoint Q&A tool
+  category: copilot-in-sales
+  description: Get answers from SharePoint documents for the given query
+  parameters: [Query (string)]
+  returns: Answers from SharePoint documents for the given query from the configured SharePoint sites
+  billing: Generative answer
+
+billing:
+  model: Copilot Studio credits, per tool invocation
+  rate_card: https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management
+  note: >-
+    Learn, verbatim — "Copilot credits are not charged for specific Dynamics 365 Sales
+    licenses." Credit consumption is tiered by agent feature: "Text and generative AI
+    tools (basic)" for 18 tools, "Generative answer" for get_sales_record_summary and
+    get_answer_from_sharepoint_documents.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probe:
+    url: https://agent365.svc.cloud.microsoft/mcp/environments/00aa00aa-bb11-cc22-dd33-44ee44ee44ee/servers/msdyn_SalesMCPServer
+    method: POST tools/list
+    http_status: 400
+    body: '{"code":"EndpointInvalid","message":"Environment id ... is invalid.","innererror":{"code":"EnvironmentIdInvalid"}}'
+    interpretation: >-
+      endpoint live and answering; tool inputSchemas require an authenticated tenant
+      environment. Tool names, parameters and return shapes below are transcribed from
+      Microsoft's own published tool tables, not guessed.
+  tool_count: 20
+  schemas_verified: false

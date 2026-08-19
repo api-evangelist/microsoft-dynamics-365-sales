@@ -1,12 +1,24 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: searched
 probe: true
 source: https://www.microsoft.com/en-us/trust-center
 url: https://www.microsoft.com/en-us/trust-center
 certifications:
 - GDPR
+compliance_overview: https://www.microsoft.com/en-us/trust-center/compliance/compliance-overview
+compliance_overview_probed_status: 200
+service_trust_portal: https://servicetrust.microsoft.com/
+note: >-
+  Only GDPR was confirmed by keyword on the probed Trust Center page, so only GDPR is
+  asserted here. Microsoft's per-service attestation set (SOC, ISO 27001, FedRAMP, HIPAA
+  and others) is published in the Service Trust Portal rather than on the page probed; the
+  compliance_overview URL above is the authoritative index and is what the Compliance
+  pointer in apis.yml resolves to.
 evidence:
 - source: https://www.microsoft.com/en-us/trust-center
   keywords:
   - trust center
   - gdpr
+- source: https://www.microsoft.com/en-us/trust-center/compliance/compliance-overview
+  http_status: 200
+  kind: compliance program index

@@ -1,0 +1,126 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Microsoft Learn Dataverse Web API documentation plus the Microsoft Trust Center; standards
+  marked derived were read out of openapi/ in this repo.
+standards:
+- id: odata-v4
+  name: OData 4.0
+  conforms: true
+  evidence: >-
+    'The Web API implements the OData v4.0 protocol; requests carry OData-Version: 4.0 and
+    OData-MaxVersion: 4.0, and the service exposes a CSDL $metadata document and a service
+    document. Learn: "Although the OData protocol allows for both JSON and ATOM format, the
+    Web API only supports JSON."'
+  docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-types-operations
+- id: oauth2
+  name: OAuth 2.0
+  conforms: true
+  evidence: >-
+    openapi securitySchemes declare type oauth2 with authorizationCode and clientCredentials
+    flows against login.microsoftonline.com.
+- id: oidc
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence: >-
+    'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration returned
+    HTTP 200 with a complete OIDC discovery document (issuer
+    https://login.microsoftonline.com/{tenantid}/v2.0); saved at
+    well-known/microsoft-dynamics-365-sales-openid-configuration.json.'
+- id: rfc8414-oauth-authorization-server-metadata
+  name: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  conforms: false
+  evidence: '/common/.well-known/oauth-authorization-server returned HTTP 404; only the OIDC path is served.'
+- id: rfc7232-conditional-requests
+  name: RFC 7232 HTTP Conditional Requests
+  conforms: true
+  evidence: >-
+    Weakly-validating @odata.etag on every entity; If-Match / If-None-Match documented for
+    conditional retrieval (304), optimistic concurrency (412) and constrained upsert.
+- id: rfc7240-prefer-header
+  name: RFC 7240 Prefer Header for HTTP
+  conforms: true
+  evidence: >-
+    'Prefer: return=representation, odata.maxpagesize, odata.include-annotations,
+    odata.track-changes, respond-async are all documented.'
+- id: rfc9457-problem-details
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    Errors use the OData error envelope {"error":{"code","message"}} as application/json.
+    No application/problem+json, no type URI, no title.
+- id: rfc9116-security-txt
+  name: RFC 9116 security.txt
+  conforms: true
+  evidence: >-
+    https://www.microsoft.com/.well-known/security.txt returned HTTP 200 text/plain with
+    Contact, Policy, Acknowledgments, Encryption, Expires, Preferred-Languages and a CSAF
+    field.
+- id: csaf
+  name: Common Security Advisory Framework
+  conforms: true
+  evidence: 'security.txt publishes CSAF: https://msrc.microsoft.com/csaf/provider-metadata.json'
+- id: rfc8594-sunset-header
+  name: RFC 8594 Sunset HTTP Header
+  conforms: false
+  evidence: >-
+    No Sunset or Deprecation response header is documented. Deprecations are announced on the
+    Power Platform "important changes coming" page and in the twice-yearly release plans.
+- id: server-driven-pagination
+  name: OData server-driven paging
+  conforms: true
+  evidence: '@odata.nextLink with Prefer: odata.maxpagesize; 5,000-record standard page cap.'
+- id: idempotency-key
+  name: Idempotency-Key request header
+  conforms: false
+  evidence: >-
+    No Idempotency-Key or Repeatability-Request-ID header is published for the Dataverse Web
+    API. Repeat-safety is achieved through PATCH upsert plus If-Match / If-None-Match; POST
+    creates carry no de-duplication token.
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: >-
+    Microsoft publishes a hosted Sales MCP server at agent365.svc.cloud.microsoft over HTTP
+    transport, plus a preview stdio server in the @microsoft/dataverse npm package.
+  see: mcp/microsoft-dynamics-365-sales-mcp.yml
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json returned 404 on
+    www.microsoft.com and learn.microsoft.com, HTML soft-200s on dynamics.microsoft.com, and
+    HTTP 400 on agent365.svc.cloud.microsoft. No agent card is published.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: >-
+    No AsyncAPI document is published. The event surface is real but is described in prose —
+    see asyncapi/microsoft-dynamics-365-sales-webhooks.yml.
+- id: graphql
+  name: GraphQL
+  conforms: false
+  evidence: No GraphQL endpoint is published for Dynamics 365 Sales or Dataverse.
+- id: fhir-r4
+  name: FHIR R4
+  conforms: false
+  evidence: Not a healthcare API.
+- id: scim2
+  name: SCIM 2.0
+  conforms: false
+  evidence: >-
+    Provisioning is handled by Microsoft Entra ID, not by the Dynamics 365 Sales Web API
+    surface.
+
+compliance_program:
+  published: true
+  url: https://www.microsoft.com/en-us/trust-center/compliance/compliance-overview
+  trust_center: https://www.microsoft.com/en-us/trust-center
+  certifications_confirmed_by_probe:
+  - GDPR
+  note: >-
+    The probe of the Microsoft Trust Center confirmed a published compliance program and a
+    GDPR commitment by keyword. Microsoft's broader attestation set (SOC, ISO 27001, FedRAMP,
+    HIPAA and others) is published per-service in the Service Trust Portal; only what the
+    probe actually verified is asserted here, and the URL above is the authoritative index.
+  see: security/microsoft-dynamics-365-sales-trust-center.yml

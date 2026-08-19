@@ -1,0 +1,180 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/microsoft-dynamics-365-sales-openapi.yml
+searched_supplement: https://learn.microsoft.com/en-us/dynamics365/sales/nurture-sales-from-lead-order-sales
+docs:
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/entitytypes
+- https://learn.microsoft.com/en-us/dynamics365/sales/nurture-sales-from-lead-order-sales
+note: >-
+  Honest scope statement. The OpenAPI in this repo declares exactly two component schemas
+  (Account, AccountCollection); every other entity is typed `object` in the spec, so the
+  field-level model below is complete ONLY for Account. The entity set and the lifecycle
+  edges come from Microsoft's own published sales-process documentation and the Web API
+  EntityType reference, and each relationship records which of the two it came from. The
+  authoritative, complete model for any given environment is the OData CSDL at
+  /api/data/v9.2/$metadata — per-tenant and auth-gated, so it cannot be harvested here.
+
+identifiers:
+  form: GUID
+  pattern: 'primary key column named <entity>id, e.g. accountid, contactid, leadid, opportunityid'
+  client_assignable: true
+  client_assignable_note: >-
+    Because the caller may supply the GUID, PATCH-to-a-known-id is the repeat-safe write
+    path — see conventions/ idempotency.
+  reference_syntax: '<navigationproperty>@odata.bind: "/accounts(<guid>)"'
+
+entities:
+- name: Account
+  entity_set: accounts
+  domain: customer organisation
+  spec_schema: true
+  operations: [accounts_list, accounts_get, accounts_create, accounts_update, accounts_delete]
+  fields:
+  - {name: accountid, role: primary_key}
+  - {name: name}
+  - {name: accountnumber}
+  - {name: accountcategorycode}
+  - {name: creditonhold}
+  - {name: revenue}
+  - {name: description}
+  - {name: address1_line1}
+  - {name: address1_city}
+  - {name: address1_country}
+  - {name: address1_latitude}
+  - {name: telephone1}
+  - {name: emailaddress1}
+  - {name: websiteurl}
+  - {name: 'primarycontactid@odata.bind', role: foreign_key, targets: Contact}
+  - {name: createdon, role: audit}
+  - {name: modifiedon, role: audit}
+- name: Contact
+  entity_set: contacts
+  domain: person
+  spec_schema: false
+  operations: [contacts_list, contacts_get, contacts_create, contacts_update, contacts_delete]
+- name: Lead
+  entity_set: leads
+  domain: unqualified interest
+  spec_schema: false
+  operations: [leads_list, leads_get, leads_create, leads_update, leads_delete]
+- name: Opportunity
+  entity_set: opportunities
+  domain: qualified deal in progress
+  spec_schema: false
+  operations: [opportunities_list, opportunities_get, opportunities_create, opportunities_update, opportunities_delete]
+- name: Quote
+  entity_set: quotes
+  domain: proposal presented to the customer
+  spec_schema: false
+  operations: [quotes_list, quotes_create]
+- name: SalesOrder
+  entity_set: salesorders
+  domain: accepted order
+  spec_schema: false
+  operations: [salesorders_list, salesorders_create]
+- name: Invoice
+  entity_set: invoices
+  domain: bill raised against a fulfilled order
+  spec_schema: false
+  operations: [invoices_list, invoices_create]
+- name: Product
+  entity_set: products
+  domain: catalogue item
+  spec_schema: false
+  operations: [products_list, products_create]
+- name: Task
+  entity_set: tasks
+  domain: activity
+  spec_schema: false
+  operations: [tasks_list, tasks_create]
+
+relationships:
+- from: Account
+  to: Contact
+  kind: has_one
+  via: 'primarycontactid@odata.bind'
+  evidence: openapi
+  confidence: high
+- from: Lead
+  to: Opportunity
+  kind: converts_to
+  via: Qualify message (lead qualification)
+  evidence: docs
+  confidence: high
+  note: 'Learn, verbatim — "Qualifying a lead in Dynamics 365 Sales converts it to an opportunity."'
+- from: Opportunity
+  to: Quote
+  kind: has_many
+  via: sales process — Propose stage
+  evidence: docs
+  confidence: high
+- from: Quote
+  to: SalesOrder
+  kind: converts_to
+  via: sales process — Close stage
+  evidence: docs
+  confidence: high
+  note: >-
+    Learn, verbatim — "When the customer agrees to the quote, an order is generated. The
+    quote and opportunity associated with the order are closed."
+- from: SalesOrder
+  to: Invoice
+  kind: converts_to
+  via: sales process — Fulfill stage
+  evidence: docs
+  confidence: high
+  note: 'Learn, verbatim — "After the order is fulfilled, an invoice is generated to bill the customer."'
+- from: Opportunity
+  to: Account
+  kind: belongs_to
+  via: customerid (customer lookup — account or contact)
+  evidence: docs
+  confidence: medium
+  note: >-
+    customerid is a polymorphic customer lookup; the spec in this repo does not declare it,
+    so the field name is taken from the Web API EntityType reference.
+- from: Quote
+  to: Product
+  kind: has_many
+  via: quotedetail line items
+  evidence: docs
+  confidence: medium
+- from: SalesOrder
+  to: Product
+  kind: has_many
+  via: salesorderdetail line items
+  evidence: docs
+  confidence: medium
+- from: Invoice
+  to: Product
+  kind: has_many
+  via: invoicedetail line items
+  evidence: docs
+  confidence: medium
+- from: Task
+  to: Account
+  kind: belongs_to
+  via: regardingobjectid (polymorphic activity party)
+  evidence: docs
+  confidence: medium
+
+lifecycle_chain:
+  stages: [Qualify, Develop, Propose, Close, Fulfill]
+  record_chain: Lead -> Opportunity -> Quote -> SalesOrder -> Invoice
+  source: https://learn.microsoft.com/en-us/dynamics365/sales/nurture-sales-from-lead-order-sales
+
+collection_envelope:
+  schema: '<Entity>Collection'
+  fields:
+  - '@odata.context'
+  - value
+  - '@odata.nextLink'
+
+gaps:
+- >-
+  8 of 9 entities carry no schema in the OpenAPI. An agent cannot learn field names for
+  Contact, Lead, Opportunity, Quote, SalesOrder, Invoice, Product or Task from the contract
+  in this repo — only from the Learn EntityType reference or from a tenant's own $metadata.
+- >-
+  No relationship in this model is machine-readable from the spec except Account ->
+  primarycontactid.

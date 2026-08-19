@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Contacts API",
+    "version": "v9.2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts",
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query contacts"
+        },
+        {
+          "info": {
+            "name": "Create a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a contact"
+        },
+        {
+          "info": {
+            "name": "Get a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts(:contactid)",
+            "params": [
+              {
+                "name": "contactid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a contact"
+        },
+        {
+          "info": {
+            "name": "Update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts(:contactid)",
+            "params": [
+              {
+                "name": "contactid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a contact"
+        },
+        {
+          "info": {
+            "name": "Delete a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org}.api.crm.dynamics.com/api/data/v9.2/contacts(:contactid)",
+            "params": [
+              {
+                "name": "contactid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a contact"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

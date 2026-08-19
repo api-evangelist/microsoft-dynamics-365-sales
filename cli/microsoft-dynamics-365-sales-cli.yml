@@ -1,0 +1,83 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/power-platform/developer/cli/introduction
+docs:
+- https://learn.microsoft.com/en-us/power-platform/developer/cli/introduction
+- https://learn.microsoft.com/en-us/power-platform/developer/cli/reference
+note: >-
+  There is no `dynamics365-sales` CLI. The first-party command-line surface for a Dynamics
+  365 Sales environment is the Microsoft Power Platform CLI (`pac`), which authenticates
+  against and operates on the Dataverse environment the Sales tables live in. A second,
+  newer CLI — @microsoft/dataverse — is in preview and additionally ships a stdio MCP server.
+
+clis:
+- name: Microsoft Power Platform CLI
+  binary: pac
+  official: true
+  version: 2.11.2
+  version_source: NuGet Microsoft.PowerApps.CLI / Microsoft.PowerApps.CLI.Tool
+  published: '2026-08-13'
+  install:
+  - method: dotnet tool
+    command: dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+    os: [windows, linux, macos]
+    caveat: >-
+      Does NOT enable `pac data`, `pac package deploy` or `pac package show` — those are
+      Windows-only and require the MSI or the VS Code extension.
+  - method: Visual Studio Code extension
+    command: install the Power Platform Tools extension
+    os: [windows, linux, macos]
+  - method: Windows MSI
+    command: download and run the MSI installer
+    os: [windows]
+    note: supports managing installed versions
+  sovereign_clouds: GCC and GCC High (US Sovereign cloud) via `pac auth create --cloud`
+  commands:
+  - group: pac auth
+    purpose: create, list, select and delete authentication profiles against a tenant/environment
+    key_commands:
+    - 'pac auth create --environment "HR-Dev"'
+    - 'pac auth create --deviceCode'
+    - pac auth list
+    - pac auth select --index 2
+  - group: pac org
+    purpose: Dataverse environment operations (list, select, who, copy, settings)
+  - group: pac solution
+    purpose: solution package lifecycle — init, add-reference, pack, unpack, import, export, publish
+  - group: pac data
+    purpose: export and import Dataverse data (Windows only)
+  - group: pac package
+    purpose: package deployment (deploy and show are Windows only)
+  - group: pac pcf
+    purpose: Power Apps component framework code components — init, push
+  - group: pac plugin
+    purpose: scaffold Dataverse plug-in projects
+  - group: pac modelbuilder
+    purpose: generate strongly-typed .NET classes from Dataverse table metadata
+  - group: pac env
+    purpose: environment lifecycle operations
+  - group: pac complete
+    purpose: shell tab completion (PowerShell, bash, zsh, fish, nushell)
+  feedback: https://github.com/microsoft/powerplatform-build-tools/discussions
+
+- name: Dataverse CLI
+  binary: dataverse
+  package: '@microsoft/dataverse'
+  official: true
+  status: preview
+  version: 1.0.63
+  published: '2026-08-08'
+  install:
+  - method: npm
+    command: npm install -g @microsoft/dataverse
+    os: [windows, linux, macos]
+  description_verbatim: 'CLI tool for Dataverse, including stdio MCP server. Preview.'
+  note: >-
+    This is the local-stdio MCP distribution recorded in
+    mcp/microsoft-dynamics-365-sales-mcp.yml. Source repo is Azure DevOps
+    (dev.azure.com/dynamicscrm/OneCRM/_git/DataverseCLI), not GitHub, so the command surface
+    is not enumerated here — only what the registry and the package description state.
+
+see_also:
+  packages: packages/microsoft-dynamics-365-sales-packages.yml
+  mcp: mcp/microsoft-dynamics-365-sales-mcp.yml

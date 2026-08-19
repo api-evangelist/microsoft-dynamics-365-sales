@@ -1,0 +1,221 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors
+docs:
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-conditional-operations-using-web-api
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/query/page-results
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/execute-batch-operations-using-web-api
+protocol: OData v4.0 (JSON only — the Web API does not support ATOM)
+
+authentication:
+  style: OAuth 2.0 bearer token issued by Microsoft Entra ID
+  header: 'Authorization: Bearer <token>'
+  see: authentication/microsoft-dynamics-365-sales-authentication.yml
+
+required_headers:
+- header: Accept
+  value: application/json
+  note: Include on every request, even when no response body is expected — errors come back as JSON.
+- header: OData-MaxVersion
+  value: '4.0'
+- header: OData-Version
+  value: '4.0'
+- header: If-None-Match
+  value: 'null'
+  note: >-
+    Recommended on all requests to defeat browser caching of expanded collection-valued
+    navigation properties.
+- header: Content-Type
+  value: application/json
+  when: any request with a JSON body
+
+idempotency:
+  idempotency_key_header: null
+  supported: partial
+  mechanism: conditional-requests + upsert-by-key
+  detail: >-
+    Dataverse publishes NO Idempotency-Key (or Repeatability-Request-ID) header. Safe repeat
+    is achieved instead through HTTP conditional requests over weakly-validating ETags:
+    PATCH to a known key is an upsert and is therefore repeatable, `If-Match: *` prevents an
+    upsert from creating a record, and `If-None-Match: *` prevents an upsert from updating
+    one. POST creates are NOT idempotent and carry no de-duplication token — a retried POST
+    creates a second record unless the caller supplies the primary key itself and uses
+    PATCH.
+  headers:
+  - header: If-Match
+    values: ['<ETag>', '*']
+    effect: >-
+      optimistic concurrency (412 Precondition Failed on mismatch); with `*`, prevents a
+      PATCH from creating a record (404 Not Found when absent).
+  - header: If-None-Match
+    values: ['<ETag>', 'null', '*']
+    effect: >-
+      conditional retrieval (304 Not Modified when unchanged); with `*`, prevents a PATCH
+      from updating an existing record (412 Precondition Failed when present).
+  - header: MSCRM.SuppressDuplicateDetection
+    values: ['false']
+    effect: >-
+      opts INTO Dataverse duplicate detection on create/update — the closest thing to a
+      server-side de-duplication guard, but it is rule-based, not request-key-based.
+  etag:
+    property: '@odata.etag'
+    validation: weak
+    returned_on: every retrieved entity instance
+    caveat: >-
+      Learn, verbatim — "Client code should not give any meaning to the specific value of an
+      ETag... the algorithm used to generate new ETag values may change without notice."
+    precondition: table must have EntityMetadata.IsOptimisticConcurrencyEnabled = true
+  conditional_retrieval_limits:
+  - '304 Not Modified is never returned when the query uses $expand'
+  - '304 Not Modified is never returned when Prefer: odata.include-annotations is set'
+  agent_guidance: >-
+    An agent retrying a write against Dynamics 365 Sales must generate the record GUID
+    client-side and PATCH it, or accept duplicate-creation risk on POST. There is no
+    idempotency key to replay.
+
+pagination:
+  style: server-driven, OData next-link
+  request_preference: 'Prefer: odata.maxpagesize=<n>'
+  response_field: '@odata.nextLink'
+  count_field: '@odata.count'
+  max_page_size:
+    standard_tables: 5000
+    elastic_tables: 500
+  count_annotations:
+  - Microsoft.Dynamics.CRM.totalrecordcount
+  - Microsoft.Dynamics.CRM.totalrecordcountlimitexceeded
+  docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/query/page-results
+
+field_selection:
+  select: $select
+  expand: $expand
+  filter: $filter
+  orderby: $orderby
+  top: $top
+  count: $count
+  note: >-
+    Full OData v4 query surface. `$select` is strongly recommended — omitting it returns all
+    non-null columns.
+
+response_shaping:
+  header: Prefer
+  values:
+  - value: return=representation
+    effect: >-
+      return the record body on POST (201 Created) or PATCH (200 OK) instead of the default
+      204 No Content.
+  - value: odata.include-annotations
+    effect: return OData/Dataverse annotations (formatted values, lookup names, error details)
+  - value: odata.maxpagesize
+    effect: page size
+  - value: odata.track-changes
+    effect: change tracking for incremental synchronisation
+  - value: respond-async
+    effect: process the request asynchronously (background operations, preview)
+  combining: 'multiple preferences are comma-separated in one Prefer header'
+
+formatted_values:
+  annotation: OData.Community.Display.V1.FormattedValue
+  lookup_annotations:
+  - Microsoft.Dynamics.CRM.associatednavigationproperty
+  - Microsoft.Dynamics.CRM.lookuplogicalname
+
+metadata:
+  service_document: /api/data/v9.2/
+  csdl: /api/data/v9.2/$metadata
+  format: OData CSDL (XML)
+  gated: true
+  note: >-
+    The CSDL at $metadata is the authoritative machine-readable contract for a Dataverse
+    environment — every table, action and function. It is per-tenant and requires an Entra
+    ID bearer token, so it cannot be harvested anonymously and is not stored in openapi/.
+  schema_version_annotation: Microsoft.Dynamics.CRM.globalmetadataversion
+  schema_version_note: >-
+    Cache this annotation; its value changes on any schema change, which is the signal to
+    refresh cached table definitions.
+
+request_tracing:
+  request_id_header: null
+  correlation: >-
+    No client-settable request-id header is documented for the Web API. Responses from the
+    gateway carry x-ms-service-request-id / x-ms-correlation-id (observed on a live probe of
+    agent365.svc.cloud.microsoft), and plug-in trace text can be returned inline via the
+    Microsoft.PowerApps.CDS.TraceText annotation when
+    `Prefer: odata.include-annotations="*"` is set.
+  help_link_annotation: Microsoft.PowerApps.CDS.HelpLink
+
+impersonation:
+  header: CallerObjectId
+  value: Microsoft Entra ID Object ID of the user to impersonate
+  requires: caller must hold the impersonation privilege
+
+consistency:
+  header: Consistency
+  value: Strong
+  effect: >-
+    forces the freshest cached metadata/labels/permissions. Learn notes a small performance
+    penalty, so it is not a default.
+  session_token_header: MSCRM.SessionToken
+  session_token_note: session-level consistency for elastic tables
+
+bypass_and_bulk_headers:
+- header: MSCRM.BypassBusinessLogicExecution
+  values: [CustomSync, CustomAsync]
+- header: MSCRM.BypassCustomPluginExecution
+  values: ['true']
+  requires: prvBypassCustomPlugins privilege
+- header: MSCRM.SuppressCallbackRegistrationExpanderJob
+  values: ['true']
+- header: MSCRM.MergeLabels
+  values: ['true', 'false']
+- header: MSCRM.SolutionUniqueName
+  values: ['<solution unique name>']
+
+batching:
+  path: /api/data/v9.2/$batch
+  method: POST
+  content_type: multipart/mixed
+  max_operations: 1000
+  url_length_inside_batch: 64 KB
+  guidance: >-
+    Learn recommends small batches (start at 10) with higher concurrency instead of large
+    batches — batching trades the request-count limit for the execution-time limit.
+  operation: batch_execute (openapi/microsoft-dynamics-365-sales-batch-api-openapi.yml)
+
+error_envelope:
+  format: odata-error
+  shape: '{"error": {"code": "<hex or empty>", "message": "<description>"}}'
+  caveat: >-
+    Learn, verbatim — the code is "not related to the http status code and is frequently
+    empty". Agents must branch on the HTTP status, not on error.code.
+  detail_annotations:
+  - '@Microsoft.PowerApps.CDS.ErrorDetails.OperationStatus'
+  - '@Microsoft.PowerApps.CDS.ErrorDetails.SubErrorCode'
+  - '@Microsoft.PowerApps.CDS.HelpLink'
+  - '@Microsoft.PowerApps.CDS.TraceText'
+  - '@Microsoft.PowerApps.CDS.InnerError.Message'
+  enable_with: 'Prefer: odata.include-annotations="*"'
+  see: errors/microsoft-dynamics-365-sales-problem-types.yml
+
+rate_limit_signaling:
+  exhaustion_status: 429
+  retry_header: Retry-After
+  observability_headers:
+  - x-ms-ratelimit-burst-remaining-xrm-requests
+  - x-ms-ratelimit-time-remaining-xrm-requests
+  see: rate-limits/microsoft-dynamics-365-sales-rate-limits.yml
+
+url_limits:
+  max_url_length: 32768
+  max_url_length_in_batch: 65536
+  max_odata_segment_length: 260
+  segment_workaround: 'use parameter aliases — /MyApi(MyParameter=@alias)?@alias=''longvalue'''
+
+cross_links:
+  authentication: authentication/microsoft-dynamics-365-sales-authentication.yml
+  scopes: scopes/microsoft-dynamics-365-sales-scopes.yml
+  errors: errors/microsoft-dynamics-365-sales-problem-types.yml
+  lifecycle: lifecycle/microsoft-dynamics-365-sales-lifecycle.yml
+  rate_limits: rate-limits/microsoft-dynamics-365-sales-rate-limits.yml
+  conformance: conformance/microsoft-dynamics-365-sales-conformance.yml

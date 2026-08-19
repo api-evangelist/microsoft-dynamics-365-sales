@@ -1,0 +1,92 @@
+# Microsoft Dynamics 365 Sales
+
+> Microsoft's enterprise CRM application for leads, opportunities, accounts, contacts,
+> quotes, orders and invoices, built on Microsoft Dataverse. Programmatic access is through
+> the Dataverse Web API — an OData v4.0 JSON interface at a per-tenant endpoint
+> https://{org}.api.crm.dynamics.com/api/data/v9.2/ — authenticated with Microsoft Entra ID
+> OAuth 2.0 bearer tokens. Microsoft also publishes a hosted Model Context Protocol server
+> exposing 20 sales insight tools.
+>
+> generated: 2026-08-13 | method: generated (no /llms.txt is published upstream —
+> https://learn.microsoft.com/llms.txt and https://www.microsoft.com/llms.txt both return 404)
+
+## Start here
+
+- [Dataverse Web API overview](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview): what the API is and how to reach it
+- [Compose HTTP requests and handle errors](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors): required headers, status codes, error envelope
+- [Perform operations using the Web API](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api): getting started
+- [Web API reference](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about): entity types, functions, actions
+- [Authentication with OAuth](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth)
+
+## Calling the API
+
+- Base URL is per environment: `https://{org}.api.crm.dynamics.com/api/data/v9.2`
+- Every request: `Accept: application/json`, `OData-MaxVersion: 4.0`, `OData-Version: 4.0`, `If-None-Match: null`
+- Auth: `Authorization: Bearer <Microsoft Entra ID token>`
+- POST and PATCH return `204 No Content` by default; add `Prefer: return=representation` for a body
+- Paging: `Prefer: odata.maxpagesize=<n>`, follow `@odata.nextLink`; 5,000 records max per page
+- There is NO idempotency key. A retried POST creates a duplicate. Supply the GUID yourself and PATCH instead.
+- Rate limits: 6,000 requests / 1,200s execution time per 300s sliding window, 52 concurrent — per user, per web server. On 429, honour `Retry-After`.
+
+## APIs
+
+- [Dataverse Web API (Dynamics 365 Sales)](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview): the OData v4 surface for every Sales table
+- [Accounts API](openapi/microsoft-dynamics-365-sales-accounts-api-openapi.yml): accounts_list, accounts_get, accounts_create, accounts_update, accounts_delete
+- [Contacts API](openapi/microsoft-dynamics-365-sales-contacts-api-openapi.yml): contacts_list, contacts_get, contacts_create, contacts_update, contacts_delete
+- [Leads API](openapi/microsoft-dynamics-365-sales-leads-api-openapi.yml): leads_list, leads_get, leads_create, leads_update, leads_delete
+- [Opportunities API](openapi/microsoft-dynamics-365-sales-opportunities-api-openapi.yml): opportunities_list, opportunities_get, opportunities_create, opportunities_update, opportunities_delete
+- [Quotes API](openapi/microsoft-dynamics-365-sales-quotes-api-openapi.yml): quotes_list, quotes_create
+- [SalesOrders API](openapi/microsoft-dynamics-365-sales-salesorders-api-openapi.yml): salesorders_list, salesorders_create
+- [Invoices API](openapi/microsoft-dynamics-365-sales-invoices-api-openapi.yml): invoices_list, invoices_create
+- [Products API](openapi/microsoft-dynamics-365-sales-products-api-openapi.yml): products_list, products_create
+- [Tasks API](openapi/microsoft-dynamics-365-sales-tasks-api-openapi.yml): tasks_list, tasks_create
+- [$batch API](openapi/microsoft-dynamics-365-sales-batch-api-openapi.yml): batch_execute — up to 1,000 operations per request
+
+## Agent surfaces
+
+- [Dynamics 365 Sales MCP server](https://learn.microsoft.com/en-us/dynamics365/sales/connect-agents-to-model-context-protocol): remote HTTP MCP at `https://agent365.svc.cloud.microsoft/mcp/environments/<EnvironmentID>/servers/msdyn_SalesMCPServer`
+- [Dataverse MCP server](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-mcp): remote HTTP MCP at `https://<OrgURL>/api/mcp` — this is where CRUD tools live
+- [MCP overview and credit rates](https://learn.microsoft.com/en-us/dynamics365/sales/model-context-protocol-sales-overview)
+- [Sales Qualification Agent tools](https://learn.microsoft.com/en-us/dynamics365/sales/sales-qualification-agent-tools)
+- [Sales Opportunity Agent tools](https://learn.microsoft.com/en-us/dynamics365/sales/sales-close-agent-research-tools)
+- [Copilot in Sales tools](https://learn.microsoft.com/en-us/dynamics365/sales/copilot-in-sales-tools)
+- No A2A agent card is published (probed 2026-08-13: 404 / soft-200 HTML on every host)
+
+## Specs and artifacts in this profile
+
+- [MCP manifest](mcp/microsoft-dynamics-365-sales-mcp.yml): 20 tools, deployment mode `both`
+- [Tool crosswalk](mcp/microsoft-dynamics-365-sales-tool-crosswalk.yml): MCP and REST are disjoint — 0 of 20 tools map to a REST operation
+- [Authentication](authentication/microsoft-dynamics-365-sales-authentication.yml)
+- [OAuth scopes](scopes/microsoft-dynamics-365-sales-scopes.yml)
+- [Conventions](conventions/microsoft-dynamics-365-sales-conventions.yml)
+- [Error catalog](errors/microsoft-dynamics-365-sales-problem-types.yml)
+- [Rate limits](rate-limits/microsoft-dynamics-365-sales-rate-limits.yml)
+- [Lifecycle and versioning](lifecycle/microsoft-dynamics-365-sales-lifecycle.yml)
+- [Conformance](conformance/microsoft-dynamics-365-sales-conformance.yml)
+- [Data model](data-model/microsoft-dynamics-365-sales-data-model.yml)
+- [Webhooks / event surface](asyncapi/microsoft-dynamics-365-sales-webhooks.yml)
+- [Packages and SDKs](packages/microsoft-dynamics-365-sales-packages.yml)
+- [CLI](cli/microsoft-dynamics-365-sales-cli.yml)
+- [Sandbox and environments](sandbox/microsoft-dynamics-365-sales-sandbox.yml)
+- [Plans and pricing](plans/microsoft-dynamics-365-sales-plans-pricing.yml)
+- [Changelog](changelog/microsoft-dynamics-365-sales-changelog.yml)
+- [Agent skills](skills/_index.yml)
+
+## SDKs
+
+- .NET: [Microsoft.PowerPlatform.Dataverse.Client](https://www.nuget.org/packages/Microsoft.PowerPlatform.Dataverse.Client) — 1.2.26, 2026-07-02
+- Python: [PowerPlatform-Dataverse-Client](https://pypi.org/project/PowerPlatform-Dataverse-Client/) — 1.0.0, 2026-05-29
+- CLI: [Microsoft Power Platform CLI (pac)](https://learn.microsoft.com/en-us/power-platform/developer/cli/introduction) — 2.11.2
+- CLI + stdio MCP (preview): [@microsoft/dataverse](https://www.npmjs.com/package/@microsoft/dataverse) — 1.0.63
+
+## Operations and trust
+
+- [Service protection API limits](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits)
+- [Status — Microsoft Cloud service health](https://status.cloud.microsoft/)
+- [Deprecations — important changes coming in Power Platform](https://learn.microsoft.com/en-us/power-platform/important-changes-coming)
+- [Release plans](https://learn.microsoft.com/en-us/dynamics365/release-plans/)
+- [Microsoft Trust Center](https://www.microsoft.com/en-us/trust-center)
+- [security.txt](https://www.microsoft.com/.well-known/security.txt) / [MSRC vulnerability report](https://msrc.microsoft.com/report/vulnerability/new)
+- [Pricing](https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing)
+- [Support](https://www.microsoft.com/en-us/dynamics-365/support)
+- [Community forum](https://community.dynamics.com/forums/thread/?groupid=d365sales)

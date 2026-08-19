@@ -1,0 +1,243 @@
+{
+  "item": [
+    {
+      "id": "0a868da5-a3ab-4a7b-bf74-78cd0f0cbd21",
+      "name": "SalesOrders",
+      "description": {
+        "content": "Sales order records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3579d1ea-cfc9-4726-99f0-7985dc8ef7f3",
+          "name": "Query sales orders",
+          "request": {
+            "name": "Query sales orders",
+            "description": {},
+            "url": {
+              "path": [
+                "salesorders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ced9d43b-2e00-4b23-be96-0e5ecbf420b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1abe3aff-4f5c-451f-9cb0-52383a2c783d",
+          "name": "Create a sales order",
+          "request": {
+            "name": "Create a sales order",
+            "description": {},
+            "url": {
+              "path": [
+                "salesorders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "32951afd-7809-4775-a9af-d5ae87eb1c3f",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Dataverse organization (environment) prefix",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "contoso",
+      "key": "org"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org}}.api.crm.dynamics.com/api/data/v9.2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://{org}.api.crm.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3f7b87ab-0a70-46b8-99c4-2a1b3ac9b998",
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts SalesOrders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OData v4 RESTful Web API for Microsoft Dataverse, the platform behind\nDynamics 365 Sales. Used to create, read, update, and delete Dynamics\n365 Sales records (accounts, contacts, leads, opportunities, quotes,\norders, invoices, products, tasks) and to invoke bound and unbound\nactions and functions. Authentication uses OAuth 2.0 bearer tokens\nissued by Microsoft Entra ID; the endpoint is per-environment, for\nexample https://{org}.api.crm.dynamics.com/api/data/v9.2/.\n\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

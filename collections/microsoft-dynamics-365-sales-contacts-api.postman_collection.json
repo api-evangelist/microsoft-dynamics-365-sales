@@ -1,0 +1,542 @@
+{
+  "item": [
+    {
+      "id": "60574951-937c-456e-bfa0-e791f476cd38",
+      "name": "Contacts",
+      "description": {
+        "content": "Contact (person) records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85c39bc4-7b39-4e7f-b7d8-bd154399c97b",
+          "name": "Query contacts",
+          "request": {
+            "name": "Query contacts",
+            "description": {},
+            "url": {
+              "path": [
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ddb99896-a7a0-4c8d-8d1e-dad43c2a1e52",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56809fd6-9f92-4a3d-ba7c-88fae4349ac0",
+          "name": "Create a contact",
+          "request": {
+            "name": "Create a contact",
+            "description": {},
+            "url": {
+              "path": [
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8afac10f-20f6-4e15-856a-2ef0970fb09b",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab0e57d8-5057-4458-adda-45fa530ec48d",
+          "name": "Get a contact",
+          "request": {
+            "name": "Get a contact",
+            "description": {},
+            "url": {
+              "path": [
+                "contacts({{contactid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4025bc8-a90d-4a33-9f8a-34042a4761e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contacts({{contactid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89fdeba1-6be1-4167-8efd-5b015690cc50",
+          "name": "Update a contact",
+          "request": {
+            "name": "Update a contact",
+            "description": {},
+            "url": {
+              "path": [
+                "contacts({{contactid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d08a5960-4301-4e18-a447-eb21c14be2b1",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contacts({{contactid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5519f282-914a-47bd-836c-96f5226f3d4a",
+          "name": "Delete a contact",
+          "request": {
+            "name": "Delete a contact",
+            "description": {},
+            "url": {
+              "path": [
+                "contacts({{contactid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8da11c97-da3b-4deb-85f0-29b03186854b",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contacts({{contactid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Dataverse organization (environment) prefix",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "contoso",
+      "key": "org"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org}}.api.crm.dynamics.com/api/data/v9.2",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "contactid"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://{org}.api.crm.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "61951573-86fd-408d-8182-cbf4f55b4e85",
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Contacts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OData v4 RESTful Web API for Microsoft Dataverse, the platform behind\nDynamics 365 Sales. Used to create, read, update, and delete Dynamics\n365 Sales records (accounts, contacts, leads, opportunities, quotes,\norders, invoices, products, tasks) and to invoke bound and unbound\nactions and functions. Authentication uses OAuth 2.0 bearer tokens\nissued by Microsoft Entra ID; the endpoint is per-environment, for\nexample https://{org}.api.crm.dynamics.com/api/data/v9.2/.\n\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

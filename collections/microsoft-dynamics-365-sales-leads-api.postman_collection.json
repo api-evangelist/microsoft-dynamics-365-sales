@@ -1,0 +1,533 @@
+{
+  "item": [
+    {
+      "id": "dce8bd9c-f10c-43f5-9192-785584ee0d7c",
+      "name": "Leads",
+      "description": {
+        "content": "Sales lead records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8567ac6-cd4d-4deb-ab6c-cb35d7cc006c",
+          "name": "Query leads",
+          "request": {
+            "name": "Query leads",
+            "description": {},
+            "url": {
+              "path": [
+                "leads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73bb296b-8ae4-4175-a9d6-8d76a4ff8de3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b9d2b5a-1f0f-40d7-9065-67ed351966e7",
+          "name": "Create a lead",
+          "request": {
+            "name": "Create a lead",
+            "description": {},
+            "url": {
+              "path": [
+                "leads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2cf06260-e787-42cd-85d3-fc3adb6dfddd",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68b8f55b-5efb-4510-9d10-11f105331a91",
+          "name": "Get a lead",
+          "request": {
+            "name": "Get a lead",
+            "description": {},
+            "url": {
+              "path": [
+                "leads({{leadid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "547b21cf-a808-49af-bf21-aa5aef298b49",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leads({{leadid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd1b92ee-37c9-4b2c-8033-44449e86fc66",
+          "name": "Update a lead",
+          "request": {
+            "name": "Update a lead",
+            "description": {},
+            "url": {
+              "path": [
+                "leads({{leadid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc37d636-7a5f-4fbf-840a-085bd220f4ab",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leads({{leadid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "337ebdd1-aaad-469c-8c13-857c43b10644",
+          "name": "Delete a lead",
+          "request": {
+            "name": "Delete a lead",
+            "description": {},
+            "url": {
+              "path": [
+                "leads({{leadid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1bd53c5-e879-4abd-ac24-e72fa994edd2",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leads({{leadid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Dataverse organization (environment) prefix",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "contoso",
+      "key": "org"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org}}.api.crm.dynamics.com/api/data/v9.2",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "leadid"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://{org}.api.crm.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1a6b0172-e335-4455-b57d-4730cfbf22d9",
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Leads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OData v4 RESTful Web API for Microsoft Dataverse, the platform behind\nDynamics 365 Sales. Used to create, read, update, and delete Dynamics\n365 Sales records (accounts, contacts, leads, opportunities, quotes,\norders, invoices, products, tasks) and to invoke bound and unbound\nactions and functions. Authentication uses OAuth 2.0 bearer tokens\nissued by Microsoft Entra ID; the endpoint is per-environment, for\nexample https://{org}.api.crm.dynamics.com/api/data/v9.2/.\n\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits
+docs:
+- https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits
+- https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations
+- https://learn.microsoft.com/en-us/power-apps/maker/data-platform/api-limits-overview
+note: >-
+  Dynamics 365 Sales inherits Microsoft Dataverse "service protection API limits". They are
+  enforced PER AUTHENTICATED USER and PER WEB SERVER — an environment usually has more than
+  one web server, and a trial environment has exactly one, so the effective ceiling varies
+  by environment. Two of the three limits use a five-minute (300 second) sliding window.
+
+limit_count: 4
+
+limits:
+- id: requests-per-window
+  scope: per-user-per-web-server
+  window: 300s (five-minute sliding window)
+  limit: 6000
+  unit: requests
+  error_status: 429
+  error_code: '0x80072322'
+  sdk_error_code: '-2147015902'
+  message: Number of requests exceeded the limit of 6000 over time window of 300 seconds.
+- id: execution-time-per-window
+  scope: per-user-per-web-server
+  window: 300s (five-minute sliding window)
+  limit: 1200
+  unit: seconds of combined server execution time (1,200,000 ms)
+  error_status: 429
+  error_code: '0x80072321'
+  sdk_error_code: '-2147015903'
+  message: >-
+    Combined execution time of incoming requests exceeded limit of 1,200,000 milliseconds
+    over time window of 300 seconds.
+  note: >-
+    This is the limit that batching runs into. Bundling operations into $batch avoids the
+    request-count limit but accrues against execution time instead.
+- id: concurrent-requests
+  scope: per-user-per-web-server
+  window: instantaneous
+  limit: 52
+  unit: concurrent requests
+  burst: 'the docs say "52 or higher" — the ceiling can be higher in some environments'
+  error_status: 429
+  error_code: '0x80072326'
+  sdk_error_code: '-2147015898'
+  message: Number of concurrent requests exceeded the limit of 52.
+  note: Unlike the two windowed limits, exceeding concurrency returns an error immediately.
+- id: dataverse-search
+  scope: per-user
+  window: 1s
+  limit: 1
+  unit: requests
+  applies_to: 'the search API (api/search), NOT api/data'
+  note: >-
+    Learn, verbatim — "Dataverse native search uses a different API (api/search rather than
+    api/data) and has different rules. When you use the Dataverse search API, there's a
+    throttling limit of one request per second for each user."
+
+response_headers:
+- header: Retry-After
+  on: 429
+  value: number of seconds to wait before retrying
+  authoritative: true
+  note: >-
+    The only value a client should act on. Duration is adaptive — it lengthens if the
+    application keeps sending demanding requests.
+- header: x-ms-ratelimit-burst-remaining-xrm-requests
+  on: every response
+  value: The remaining number of requests for this connection
+  authoritative: false
+- header: x-ms-ratelimit-time-remaining-xrm-requests
+  on: every response
+  value: The remaining combined duration for all connections using the same user account
+  authoritative: false
+
+header_caveat: >-
+  Learn, verbatim — "Don't depend on these values to control how many requests you send.
+  They're intended for debugging purposes. If you're removing the affinity cookie, these
+  values are reset when you connect to a different server." An agent should back off on
+  Retry-After, not on the x-ms-ratelimit-* counters.
+
+exhaustion:
+  status: 429
+  status_name: Too Many Requests
+  retry_signal: Retry-After header (seconds)
+  sdk_equivalent: >-
+    OrganizationServiceFault with a Retry-After TimeSpan in ErrorDetails; the
+    Microsoft.PowerPlatform.Dataverse.Client ServiceClient and Xrm.Tooling
+    CrmServiceClient (after 9.0.2.16) pause and resend automatically.
+
+exemptions:
+- Plug-ins and custom workflow activities — they run in the isolated sandbox service and do
+  not use the public API endpoints, so their requests do not count. Their execution time
+  DOES accrue to the request that triggered them.
+
+adjacent_limits:
+- id: entitlement-limits
+  note: >-
+    Separate from service protection. Per-license daily API request allocations, evaluated
+    independently — "Batch operations aren't a valid strategy to bypass entitlement limits."
+  docs: https://learn.microsoft.com/en-us/power-apps/maker/data-platform/api-limits-overview
+- id: max-url-length
+  limit: 32 KB (32,768 characters); 64 KB (65,536) inside a $batch body
+  error: '400 Bad Request, code 0x80060888 "Invalid URI: The Uri string is too long."'
+- id: max-odata-segment-length
+  limit: 260 characters per segment
+  error: 400 Bad Request - Invalid URL
+- id: batch-size
+  limit: up to 1,000 operations per batch (ExecuteMultipleRequest / $batch)
+  guidance: 'Learn recommends starting at a batch size of 10 and raising concurrency instead.'
+- id: page-size
+  limit: 5,000 records per page for standard tables; 500 for elastic tables

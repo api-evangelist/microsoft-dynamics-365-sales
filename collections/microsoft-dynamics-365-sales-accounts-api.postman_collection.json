@@ -1,0 +1,752 @@
+{
+  "item": [
+    {
+      "id": "6c28369c-9819-4836-8f32-f122074261dc",
+      "name": "Accounts",
+      "description": {
+        "content": "Account (customer organization) records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6a41d81-0048-4412-aa92-e87faeb68079",
+          "name": "Query accounts",
+          "request": {
+            "name": "Query accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "OData-MaxVersion",
+                "value": "4.0",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "OData-Version",
+                "value": "4.0",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d3c4679-c4bf-4ffa-987b-dd3cad019a26",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "OData-MaxVersion",
+                    "value": "4.0",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "OData-Version",
+                    "value": "4.0",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"string\",\n  \"value\": [\n    {\n      \"accountid\": \"1c68ec82-32ae-585f-d701-2393f2951327\",\n      \"name\": \"string\",\n      \"accountnumber\": \"string\",\n      \"accountcategorycode\": 9511,\n      \"creditonhold\": false,\n      \"revenue\": 5547.697007546895,\n      \"description\": \"string\",\n      \"address1_line1\": \"string\",\n      \"address1_city\": \"string\",\n      \"address1_country\": \"string\",\n      \"address1_latitude\": 6795.023005647039,\n      \"telephone1\": \"string\",\n      \"emailaddress1\": \"string\",\n      \"websiteurl\": \"string\",\n      \"primarycontactid@odata.bind\": \"string\",\n      \"createdon\": \"2004-07-18T22:42:33.491Z\",\n      \"modifiedon\": \"1976-09-04T17:05:01.440Z\"\n    },\n    {\n      \"accountid\": \"009145bf-06b5-ad3f-b577-0bc904206dd9\",\n      \"name\": \"string\",\n      \"accountnumber\": \"string\",\n      \"accountcategorycode\": 211,\n      \"creditonhold\": false,\n      \"revenue\": 4499.978088459999,\n      \"description\": \"string\",\n      \"address1_line1\": \"string\",\n      \"address1_city\": \"string\",\n      \"address1_country\": \"string\",\n      \"address1_latitude\": 1382.1040871053924,\n      \"telephone1\": \"string\",\n      \"emailaddress1\": \"string\",\n      \"websiteurl\": \"string\",\n      \"primarycontactid@odata.bind\": \"string\",\n      \"createdon\": \"1949-02-06T17:17:31.397Z\",\n      \"modifiedon\": \"1963-09-12T20:25:31.765Z\"\n    }\n  ],\n  \"@odata.nextLink\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f56234ae-daaa-424b-b928-2d14ceecea5e",
+          "name": "Create an account",
+          "request": {
+            "name": "Create an account",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "OData-MaxVersion",
+                "value": "4.0",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "OData-Version",
+                "value": "4.0",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "Set to \"return=representation\" to receive the created record in the response",
+                "key": "Prefer",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"accountnumber\": \"<string>\",\n  \"accountcategorycode\": \"<integer>\",\n  \"creditonhold\": \"<boolean>\",\n  \"revenue\": \"<double>\",\n  \"description\": \"<string>\",\n  \"address1_line1\": \"<string>\",\n  \"address1_city\": \"<string>\",\n  \"address1_country\": \"<string>\",\n  \"address1_latitude\": \"<double>\",\n  \"telephone1\": \"<string>\",\n  \"emailaddress1\": \"<string>\",\n  \"websiteurl\": \"<string>\",\n  \"primarycontactid@odata.bind\": \"<string>\",\n  \"createdon\": \"<dateTime>\",\n  \"modifiedon\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4e67181-5c64-4b26-a233-18fa23fe283a",
+              "name": "Created (with return=representation Prefer header)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "OData-MaxVersion",
+                    "value": "4.0",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "OData-Version",
+                    "value": "4.0",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Set to \"return=representation\" to receive the created record in the response",
+                    "key": "Prefer",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"accountnumber\": \"<string>\",\n  \"accountcategorycode\": \"<integer>\",\n  \"creditonhold\": \"<boolean>\",\n  \"revenue\": \"<double>\",\n  \"description\": \"<string>\",\n  \"address1_line1\": \"<string>\",\n  \"address1_city\": \"<string>\",\n  \"address1_country\": \"<string>\",\n  \"address1_latitude\": \"<double>\",\n  \"telephone1\": \"<string>\",\n  \"emailaddress1\": \"<string>\",\n  \"websiteurl\": \"<string>\",\n  \"primarycontactid@odata.bind\": \"<string>\",\n  \"createdon\": \"<dateTime>\",\n  \"modifiedon\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountid\": \"1976374e-f260-56af-6d5f-c1662a6d9fc1\",\n  \"name\": \"string\",\n  \"accountnumber\": \"string\",\n  \"accountcategorycode\": 9333,\n  \"creditonhold\": true,\n  \"revenue\": 56.472399793905396,\n  \"description\": \"string\",\n  \"address1_line1\": \"string\",\n  \"address1_city\": \"string\",\n  \"address1_country\": \"string\",\n  \"address1_latitude\": 7265.005180168719,\n  \"telephone1\": \"string\",\n  \"emailaddress1\": \"string\",\n  \"websiteurl\": \"string\",\n  \"primarycontactid@odata.bind\": \"string\",\n  \"createdon\": \"1959-09-08T13:10:10.039Z\",\n  \"modifiedon\": \"1993-02-10T23:43:36.368Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d61f48f-64c5-482c-a27a-a91ee10ee873",
+              "name": "No Content (with OData-EntityId header)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "OData-MaxVersion",
+                    "value": "4.0",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "OData-Version",
+                    "value": "4.0",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Set to \"return=representation\" to receive the created record in the response",
+                    "key": "Prefer",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"accountnumber\": \"<string>\",\n  \"accountcategorycode\": \"<integer>\",\n  \"creditonhold\": \"<boolean>\",\n  \"revenue\": \"<double>\",\n  \"description\": \"<string>\",\n  \"address1_line1\": \"<string>\",\n  \"address1_city\": \"<string>\",\n  \"address1_country\": \"<string>\",\n  \"address1_latitude\": \"<double>\",\n  \"telephone1\": \"<string>\",\n  \"emailaddress1\": \"<string>\",\n  \"websiteurl\": \"<string>\",\n  \"primarycontactid@odata.bind\": \"<string>\",\n  \"createdon\": \"<dateTime>\",\n  \"modifiedon\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd234a51-43f4-48a7-8df6-8e4c0e55bd68",
+          "name": "Get an account",
+          "request": {
+            "name": "Get an account",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts({{accountid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0edadb66-d9af-4367-b607-b9b3fd8b7bc7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts({{accountid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountid\": \"1976374e-f260-56af-6d5f-c1662a6d9fc1\",\n  \"name\": \"string\",\n  \"accountnumber\": \"string\",\n  \"accountcategorycode\": 9333,\n  \"creditonhold\": true,\n  \"revenue\": 56.472399793905396,\n  \"description\": \"string\",\n  \"address1_line1\": \"string\",\n  \"address1_city\": \"string\",\n  \"address1_country\": \"string\",\n  \"address1_latitude\": 7265.005180168719,\n  \"telephone1\": \"string\",\n  \"emailaddress1\": \"string\",\n  \"websiteurl\": \"string\",\n  \"primarycontactid@odata.bind\": \"string\",\n  \"createdon\": \"1959-09-08T13:10:10.039Z\",\n  \"modifiedon\": \"1993-02-10T23:43:36.368Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec703fad-fc70-48a9-b96c-46bda770bacb",
+          "name": "Update an account",
+          "request": {
+            "name": "Update an account",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts({{accountid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "If-Match",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"accountnumber\": \"<string>\",\n  \"accountcategorycode\": \"<integer>\",\n  \"creditonhold\": \"<boolean>\",\n  \"revenue\": \"<double>\",\n  \"description\": \"<string>\",\n  \"address1_line1\": \"<string>\",\n  \"address1_city\": \"<string>\",\n  \"address1_country\": \"<string>\",\n  \"address1_latitude\": \"<double>\",\n  \"telephone1\": \"<string>\",\n  \"emailaddress1\": \"<string>\",\n  \"websiteurl\": \"<string>\",\n  \"primarycontactid@odata.bind\": \"<string>\",\n  \"createdon\": \"<dateTime>\",\n  \"modifiedon\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "709905b4-9e62-4d21-b4c8-d1677acbdbf1",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts({{accountid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"accountnumber\": \"<string>\",\n  \"accountcategorycode\": \"<integer>\",\n  \"creditonhold\": \"<boolean>\",\n  \"revenue\": \"<double>\",\n  \"description\": \"<string>\",\n  \"address1_line1\": \"<string>\",\n  \"address1_city\": \"<string>\",\n  \"address1_country\": \"<string>\",\n  \"address1_latitude\": \"<double>\",\n  \"telephone1\": \"<string>\",\n  \"emailaddress1\": \"<string>\",\n  \"websiteurl\": \"<string>\",\n  \"primarycontactid@odata.bind\": \"<string>\",\n  \"createdon\": \"<dateTime>\",\n  \"modifiedon\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "969325da-d391-4ac8-9ac7-5845b9a73b39",
+          "name": "Delete an account",
+          "request": {
+            "name": "Delete an account",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts({{accountid}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Dataverse organization (environment) prefix",
+                  "type": "any",
+                  "value": "{{org}}",
+                  "key": "org"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ba0da92-8af8-4807-a5e6-8e03faa54c59",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts({{accountid}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Dataverse organization (environment) prefix",
+                      "type": "any",
+                      "value": "{{org}}",
+                      "key": "org"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Dataverse organization (environment) prefix",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "contoso",
+      "key": "org"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org}}.api.crm.dynamics.com/api/data/v9.2",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "accountid"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://{org}.api.crm.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "387d4fc9-464a-41f5-9753-acf739e38509",
+    "name": "Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OData v4 RESTful Web API for Microsoft Dataverse, the platform behind\nDynamics 365 Sales. Used to create, read, update, and delete Dynamics\n365 Sales records (accounts, contacts, leads, opportunities, quotes,\norders, invoices, products, tasks) and to invoke bound and unbound\nactions and functions. Authentication uses OAuth 2.0 bearer tokens\nissued by Microsoft Entra ID; the endpoint is per-environment, for\nexample https://{org}.api.crm.dynamics.com/api/data/v9.2/.\n\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors
+
+versioning:
+  scheme: uri-path
+  current: v9.2
+  form: /api/data/v[Major].[Minor][Patch]/
+  docs: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors#web-api-url-and-versions
+  compatibility: >-
+    Learn, verbatim — "Your code written for v9.0 continues to work in future versions when
+    you reference v9.0 in your URL." And the warning that matters — "Unlike the v8.x minor
+    releases, future versions don't apply new capabilities or other changes to earlier
+    versions. Pay attention to the version of the service you use and test your code if you
+    change the version used."
+  breaking_change_posture: >-
+    "As new capabilities are introduced, they might conflict with earlier versions. These
+    breaking changes are necessary to improve the service."
+  release_train:
+    cadence: two release waves per year
+    waves:
+    - name: 2026 release wave 1
+      window: April 2026 through September 2026
+      plan: https://learn.microsoft.com/en-us/dynamics365/release-plan/2026wave1/sales/dynamics365-sales/
+    - name: 2025 release wave 2
+      plan: https://learn.microsoft.com/en-us/dynamics365/release-plan/2025wave2/sales/dynamics365-sales/planned-features
+
+deprecation:
+  policy_url: https://learn.microsoft.com/en-us/power-platform/important-changes-coming
+  policy_statement: >-
+    Verbatim — "'Deprecated' means we intend to remove the feature or capability from a
+    future release. The feature or capability is fully supported until it's officially
+    removed. This deprecation notification can span a few months or years. After removal,
+    the feature or capability will no longer work. This notice is to allow you sufficient
+    time to plan and update your code before the feature or capability is removed."
+  notice_period: 'stated as "a few months or years"; no fixed minimum is published'
+  sunset_header: false
+  sunset_header_note: >-
+    No RFC 8594 Sunset or Deprecation response header is documented for the Dataverse Web
+    API. Deprecations are announced on the "Important changes (deprecations) coming in
+    Power Platform" page and in the release plans, not in the HTTP response.
+  named_api_deprecations:
+  - item: Xrm.Sdk.Client.OrganizationServiceProxy class
+    replacement: Microsoft.PowerPlatform.Dataverse.Client ServiceClient
+    source: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits
+  - item: Office365 authentication type for connecting to Dataverse
+    replacement: OAuth 2.0 / Microsoft Entra ID
+    source: https://learn.microsoft.com/en-us/power-platform/important-changes-coming
+  - item: Bring-Your-Own-Key (BYOK) for Dataverse
+    replacement: Customer-Managed Keys (CMK)
+    effective: '2026-01-06'
+  - item: Editable Grid and Power Apps Read-Only Grid controls (model-driven apps)
+    replacement: Power Apps grid control
+    effective: '2026-03'
+
+status_page: https://status.cloud.microsoft/
+status_pages:
+- url: https://status.cloud.microsoft/
+  name: Microsoft Cloud service health
+  probed_status: 200
+- url: https://admin.microsoft.com/servicestatus
+  name: Microsoft 365 admin center — Service health (tenant-scoped)
+  probed_status: 200
+  note: Per-tenant view; requires sign-in to see your own environment's incidents.
+
+sla:
+  url: https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services
+  name: Service Level Agreements (SLA) for Microsoft Online Services
+  uptime_target: null
+  note: >-
+    Microsoft publishes the SLA as a licensing document covering Dynamics 365 online
+    services rather than as a per-API uptime figure on the developer docs, so no numeric
+    target is recorded here rather than guessing one.
+
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in openapi/ carries `deprecated: true`.
+
+x-evidence:
+- url: https://status.cloud.microsoft/
+  http_status: 200
+- url: https://learn.microsoft.com/en-us/power-platform/important-changes-coming
+  http_status: 200
+- url: https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services
+  http_status: 200

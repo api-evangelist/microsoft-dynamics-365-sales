@@ -1,0 +1,60 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Contacts API
+  version: 1.0.0
+extends: openapi/microsoft-dynamics-365-sales-contacts-api-openapi.yml
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: openapi/microsoft-dynamics-365-sales-contacts-api-openapi.yml
+  note: >-
+    Captures API Evangelist's enrichment of this specification without mutating the
+    harvested document. Every value asserted here is sourced from Microsoft's own published
+    documentation and recorded in the sibling artifacts named below.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/microsoft-dynamics-365-sales
+      x-apievangelist-conventions: conventions/microsoft-dynamics-365-sales-conventions.yml
+      x-apievangelist-errors: errors/microsoft-dynamics-365-sales-problem-types.yml
+      x-apievangelist-rate-limits: rate-limits/microsoft-dynamics-365-sales-rate-limits.yml
+      x-apievangelist-authentication: authentication/microsoft-dynamics-365-sales-authentication.yml
+      x-apievangelist-lifecycle: lifecycle/microsoft-dynamics-365-sales-lifecycle.yml
+      x-apievangelist-data-model: data-model/microsoft-dynamics-365-sales-data-model.yml
+      x-api-version-scheme: uri-path
+      x-api-current-version: v9.2
+      x-protocol: OData 4.0
+  - target: $.servers[0]
+    update:
+      x-templated: true
+      x-template-note: >-
+        The org segment is the per-tenant Dataverse environment prefix. Resolve it from the
+        Power Platform discovery service or from Power Apps -> Settings -> Developer
+        resources -> Web API endpoint.
+  - target: $
+    update:
+      x-rate-limits:
+        requests: 6000 per 300s sliding window, per user, per web server
+        execution_time: 1200s per 300s sliding window, per user, per web server
+        concurrency: 52 or higher
+        exhaustion_status: 429
+        retry_header: Retry-After
+        observability_headers:
+          - x-ms-ratelimit-burst-remaining-xrm-requests
+          - x-ms-ratelimit-time-remaining-xrm-requests
+      x-idempotency:
+        idempotency_key_header: null
+        mechanism: conditional-requests + upsert-by-key
+        note: >-
+          No Idempotency-Key header exists. PATCH to a caller-supplied GUID is repeat-safe;
+          POST creates are not, and a retried POST creates a duplicate record.
+      x-error-format: odata-error
+      x-pagination:
+        style: odata-next-link
+        request: 'Prefer: odata.maxpagesize'
+        response_field: '@odata.nextLink'
+        max_page_size: 5000
+      x-agent-surface:
+        mcp: mcp/microsoft-dynamics-365-sales-mcp.yml
+        tool_crosswalk: mcp/microsoft-dynamics-365-sales-tool-crosswalk.yml
+        agent_card: null
