@@ -11,6 +11,18 @@ description: >-
   (Microsoft Entra ID) Bearer token authentication and is reached at a
   per-environment endpoint such as https://{org}.api.crm.dynamics.com/api/data/v9.2/.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
