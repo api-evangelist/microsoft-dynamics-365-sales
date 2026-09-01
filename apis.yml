@@ -39,7 +39,6 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-
 tags:
   - CRM
   - Sales
-  - Customer Relationship Management
   - Dynamics 365
   - Microsoft
   - Dataverse
@@ -110,7 +109,7 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
   baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
   tags:
-  - $batch
+  - Batch
   tags_raw:
   - $batch
   properties:
