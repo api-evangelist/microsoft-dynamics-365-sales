@@ -53,8 +53,7 @@ tags_raw:
   - Dataverse
   - OData
   - Sales Automation
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/microsoft-dynamics-365-sales/refs/heads/main/apis.yml
+url: https://www.microsoft.com/en-us/dynamics-365/products/sales
 created: '2026-05-11'
 modified: '2026-08-13'
 specificationVersion: '0.23'
@@ -352,5 +351,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 33
   pass: local-v1
-x-parent: microsoft
+x-parent: microsoft-dynamics-365
 x-relationship: product
