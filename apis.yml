@@ -352,3 +352,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 33
   pass: local-v1
+x-parent: microsoft
+x-relationship: product

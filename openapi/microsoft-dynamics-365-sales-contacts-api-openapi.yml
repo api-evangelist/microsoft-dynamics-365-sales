@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Contacts API
   description: 'OData v4 RESTful Web API for Microsoft Dataverse, the platform behind
@@ -117,13 +117,13 @@ paths:
           description: No Content
 components:
   parameters:
-    select:
-      name: $select
+    filter:
+      name: $filter
       in: query
       schema:
         type: string
-    filter:
-      name: $filter
+    select:
+      name: $select
       in: query
       schema:
         type: string
