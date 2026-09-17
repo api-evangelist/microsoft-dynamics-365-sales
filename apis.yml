@@ -190,20 +190,6 @@ apis:
     url: openapi/microsoft-dynamics-365-sales-quotes-api-openapi.yml
   - type: Overlay
     url: overlays/microsoft-dynamics-365-sales-quotes-api-overlay.yaml
-- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-salesorders-api
-  name: Microsoft Dynamics 365 Sales SalesOrders API
-  description: Sales order records
-  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
-  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
-  tags:
-  - Sales Orders
-  tags_raw:
-  - SalesOrders
-  properties:
-  - type: OpenAPI
-    url: openapi/microsoft-dynamics-365-sales-salesorders-api-openapi.yml
-  - type: Overlay
-    url: overlays/microsoft-dynamics-365-sales-salesorders-api-overlay.yaml
 - aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-tasks-api
   name: Microsoft Dynamics 365 Sales Tasks API
   description: Activity tasks
@@ -221,16 +207,17 @@ apis:
 - aid: microsoft-dynamics-365-sales:dynamics-365-sales-mcp-server
   name: Dynamics 365 Sales MCP Server
   description: >-
-    Microsoft's hosted Model Context Protocol server for Dynamics 365 Sales. Exposes 20
-    sales tools to any MCP-capable agent — lead and account research, competitor research,
-    engagement summaries, lead qualification assessment, outreach email drafting,
-    MEDDPICC opportunity health, opportunity signals, stakeholders, risks and pain points,
-    record catch-ups, and SharePoint document search and Q&A. The endpoint is
-    per-environment and authenticates with Microsoft Entra ID. It carries no CRUD tools —
-    creating and updating Sales records goes through the Dataverse MCP server at
-    https://{org}.api.crm.dynamics.com/api/mcp or the Dataverse Web API.
-  humanURL: https://learn.microsoft.com/en-us/dynamics365/sales/connect-agents-to-model-context-protocol
-  baseURL: https://agent365.svc.cloud.microsoft/mcp/environments/{EnvironmentID}/servers/msdyn_SalesMCPServer
+    Microsoft's hosted Model Context Protocol server for Dynamics 365 Sales. Exposes 20 sales tools to
+    any MCP-capable agent — lead and account research, competitor research, engagement summaries, lead
+    qualification assessment, outreach email drafting, MEDDPICC opportunity health, opportunity signals,
+    stakeholders, risks and pain points, record catch-ups, and SharePoint document search and Q&A. The
+    endpoint is per-environment and authenticates with Microsoft Entra ID. It carries no CRUD tools —
+    creating and updating Sales records goes through the Dataverse MCP server at https://{org}.api.crm.dynamics.com/api/mcp
+    or the Dataverse Web API.
+  humanURL: >-
+    https://learn.microsoft.com/en-us/dynamics365/sales/connect-agents-to-model-context-protocol
+  baseURL: >-
+    https://agent365.svc.cloud.microsoft/mcp/environments/{EnvironmentID}/servers/msdyn_SalesMCPServer
   tags:
   - MCP
   - Agents
@@ -243,10 +230,23 @@ apis:
   - type: ToolCrosswalk
     url: mcp/microsoft-dynamics-365-sales-tool-crosswalk.yml
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/dynamics365/sales/model-context-protocol-sales-overview
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/sales/model-context-protocol-sales-overview
   - type: Authentication
     url: authentication/microsoft-dynamics-365-sales-authentication.yml
+- aid: microsoft-dynamics-365-sales:microsoft-dynamics-365-sales-sales-orders-api
+  name: Microsoft Dynamics 365 Sales Sales Orders API
+  description: Sales order records
+  humanURL: https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview
+  baseURL: https://{org}.api.crm.dynamics.com/api/data/v9.2
+  tags:
+  - Sales Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-dynamics-365-sales-sales-orders-api-openapi.yml
 common:
+  - type: Overlay
+    url: overlays/microsoft-dynamics-365-sales-salesorders-api-overlay.yaml
   - type: AgenticAccess
     url: agentic-access/microsoft-dynamics-365-sales-agentic-access.yml
   - type: TrustCenter
