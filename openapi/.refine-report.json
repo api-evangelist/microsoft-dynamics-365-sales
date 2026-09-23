@@ -1,20 +1,11 @@
 {
   "provider": "microsoft-dynamics-365-sales",
   "sources": [
-    "microsoft-dynamics-365-sales-accounts-api-openapi.yml",
-    "microsoft-dynamics-365-sales-batch-api-openapi.yml",
-    "microsoft-dynamics-365-sales-contacts-api-openapi.yml",
-    "microsoft-dynamics-365-sales-invoices-api-openapi.yml",
-    "microsoft-dynamics-365-sales-leads-api-openapi.yml",
-    "microsoft-dynamics-365-sales-opportunities-api-openapi.yml",
-    "microsoft-dynamics-365-sales-products-api-openapi.yml",
-    "microsoft-dynamics-365-sales-quotes-api-openapi.yml",
-    "microsoft-dynamics-365-sales-salesorders-api-openapi.yml",
-    "microsoft-dynamics-365-sales-tasks-api-openapi.yml"
+    "_original/microsoft-dynamics-365-sales-openapi.yml"
   ],
   "outputs": [
-    "microsoft-dynamics-365-sales-accounts-api-openapi.yml",
     "microsoft-dynamics-365-sales-batch-api-openapi.yml",
+    "microsoft-dynamics-365-sales-accounts-api-openapi.yml",
     "microsoft-dynamics-365-sales-contacts-api-openapi.yml",
     "microsoft-dynamics-365-sales-invoices-api-openapi.yml",
     "microsoft-dynamics-365-sales-leads-api-openapi.yml",
@@ -24,21 +15,29 @@
     "microsoft-dynamics-365-sales-salesorders-api-openapi.yml",
     "microsoft-dynamics-365-sales-tasks-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "microsoft-dynamics-365-sales-accounts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-batch-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-contacts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-invoices-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-leads-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-opportunities-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-products-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-quotes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-salesorders-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-dynamics-365-sales-tasks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "microsoft-dynamics-365-sales-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "microsoft-dynamics-365-sales-openapi.yml: tagged paths POST /$batch -> $batch",
+    "microsoft-dynamics-365-sales-openapi.yml: declared missing tag: $batch",
+    "superseded outputs removed: microsoft-dynamics-365-sales-sales-orders-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 12 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "microsoft-dynamics-365-sales-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-batch-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-leads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-opportunities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-quotes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-sales-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-dynamics-365-sales-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

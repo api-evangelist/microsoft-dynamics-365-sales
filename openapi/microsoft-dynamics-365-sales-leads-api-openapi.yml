@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Leads API
+  title: Microsoft Dataverse Web API (Dynamics 365 Sales) Leads API
   description: 'OData v4 RESTful Web API for Microsoft Dataverse, the platform behind
 
     Dynamics 365 Sales. Used to create, read, update, and delete Dynamics
@@ -13,9 +13,7 @@ info:
 
     issued by Microsoft Entra ID; the endpoint is per-environment, for
 
-    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.
-
-    '
+    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.'
   version: v9.2
   contact:
     name: Kin Lane
@@ -116,13 +114,13 @@ paths:
           description: No Content
 components:
   parameters:
-    filter:
-      name: $filter
+    select:
+      name: $select
       in: query
       schema:
         type: string
-    select:
-      name: $select
+    filter:
+      name: $filter
       in: query
       schema:
         type: string

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts $batch $batch API
+  title: Microsoft Dataverse Web API (Dynamics 365 Sales) $batch API
   description: 'OData v4 RESTful Web API for Microsoft Dataverse, the platform behind
 
     Dynamics 365 Sales. Used to create, read, update, and delete Dynamics
@@ -13,9 +13,7 @@ info:
 
     issued by Microsoft Entra ID; the endpoint is per-environment, for
 
-    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.
-
-    '
+    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.'
   version: v9.2
   contact:
     name: Kin Lane
@@ -33,7 +31,7 @@ servers:
 security:
 - oauth2: []
 tags:
-- name: $batch
+- name: Batch
 paths:
   /$batch:
     post:
@@ -49,7 +47,7 @@ paths:
         '200':
           description: OK
       tags:
-      - $batch
+      - Batch
 components:
   securitySchemes:
     oauth2:

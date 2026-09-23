@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Sales Orders API
+  title: Microsoft Dataverse Web API (Dynamics 365 Sales) Sales…
   description: 'OData v4 RESTful Web API for Microsoft Dataverse, the platform behind
 
     Dynamics 365 Sales. Used to create, read, update, and delete Dynamics
@@ -13,9 +13,7 @@ info:
 
     issued by Microsoft Entra ID; the endpoint is per-environment, for
 
-    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.
-
-    '
+    example https://{org}.api.crm.dynamics.com/api/data/v9.2/.'
   version: v9.2
   contact:
     name: Kin Lane
@@ -33,13 +31,13 @@ servers:
 security:
 - oauth2: []
 tags:
-- name: SalesOrders
+- name: Sales Orders
   description: Sales order records
 paths:
   /salesorders:
     get:
       tags:
-      - SalesOrders
+      - Sales Orders
       summary: Query sales orders
       operationId: salesorders_list
       responses:
@@ -47,7 +45,7 @@ paths:
           description: OK
     post:
       tags:
-      - SalesOrders
+      - Sales Orders
       summary: Create a sales order
       operationId: salesorders_create
       requestBody:
