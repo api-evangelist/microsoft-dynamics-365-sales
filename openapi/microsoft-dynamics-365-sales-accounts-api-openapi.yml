@@ -131,30 +131,32 @@ components:
       schema:
         type: string
         default: '4.0'
-    orderby:
-      name: $orderby
-      in: query
+    accountId:
+      name: accountid
+      in: path
+      required: true
       schema:
         type: string
-    filter:
-      name: $filter
-      in: query
-      schema:
-        type: string
-    select:
-      name: $select
-      in: query
-      schema:
-        type: string
+        format: uuid
     prefer:
       name: Prefer
       in: header
       description: Set to "return=representation" to receive the created record in the response
       schema:
         type: string
-    ifMatch:
-      name: If-Match
-      in: header
+    top:
+      name: $top
+      in: query
+      schema:
+        type: integer
+    orderby:
+      name: $orderby
+      in: query
+      schema:
+        type: string
+    expand:
+      name: $expand
+      in: query
       schema:
         type: string
     odataVersion:
@@ -163,23 +165,21 @@ components:
       schema:
         type: string
         default: '4.0'
-    top:
-      name: $top
-      in: query
-      schema:
-        type: integer
-    expand:
-      name: $expand
+    select:
+      name: $select
       in: query
       schema:
         type: string
-    accountId:
-      name: accountid
-      in: path
-      required: true
+    filter:
+      name: $filter
+      in: query
       schema:
         type: string
-        format: uuid
+    ifMatch:
+      name: If-Match
+      in: header
+      schema:
+        type: string
   schemas:
     Account:
       type: object
