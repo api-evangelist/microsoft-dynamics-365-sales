@@ -125,8 +125,20 @@ paths:
           description: No Content
 components:
   parameters:
+    prefer:
+      name: Prefer
+      in: header
+      description: Set to "return=representation" to receive the created record in the response
+      schema:
+        type: string
     odataMaxVersion:
       name: OData-MaxVersion
+      in: header
+      schema:
+        type: string
+        default: '4.0'
+    odataVersion:
+      name: OData-Version
       in: header
       schema:
         type: string
@@ -138,10 +150,14 @@ components:
       schema:
         type: string
         format: uuid
-    prefer:
-      name: Prefer
-      in: header
-      description: Set to "return=representation" to receive the created record in the response
+    select:
+      name: $select
+      in: query
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
       schema:
         type: string
     top:
@@ -159,28 +175,23 @@ components:
       in: query
       schema:
         type: string
-    odataVersion:
-      name: OData-Version
-      in: header
-      schema:
-        type: string
-        default: '4.0'
-    select:
-      name: $select
-      in: query
-      schema:
-        type: string
-    filter:
-      name: $filter
-      in: query
-      schema:
-        type: string
     ifMatch:
       name: If-Match
       in: header
       schema:
         type: string
   schemas:
+    AccountCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        '@odata.nextLink':
+          type: string
     Account:
       type: object
       properties:
@@ -224,17 +235,6 @@ components:
         modifiedon:
           type: string
           format: date-time
-    AccountCollection:
-      type: object
-      properties:
-        '@odata.context':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        '@odata.nextLink':
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2
