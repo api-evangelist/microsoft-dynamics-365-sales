@@ -125,6 +125,39 @@ paths:
           description: No Content
 components:
   parameters:
+    orderby:
+      name: $orderby
+      in: query
+      schema:
+        type: string
+    expand:
+      name: $expand
+      in: query
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      schema:
+        type: string
+    accountId:
+      name: accountid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    odataVersion:
+      name: OData-Version
+      in: header
+      schema:
+        type: string
+        default: '4.0'
+    filter:
+      name: $filter
+      in: query
+      schema:
+        type: string
     prefer:
       name: Prefer
       in: header
@@ -137,27 +170,9 @@ components:
       schema:
         type: string
         default: '4.0'
-    odataVersion:
-      name: OData-Version
+    ifMatch:
+      name: If-Match
       in: header
-      schema:
-        type: string
-        default: '4.0'
-    accountId:
-      name: accountid
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    select:
-      name: $select
-      in: query
-      schema:
-        type: string
-    filter:
-      name: $filter
-      in: query
       schema:
         type: string
     top:
@@ -165,21 +180,6 @@ components:
       in: query
       schema:
         type: integer
-    orderby:
-      name: $orderby
-      in: query
-      schema:
-        type: string
-    expand:
-      name: $expand
-      in: query
-      schema:
-        type: string
-    ifMatch:
-      name: If-Match
-      in: header
-      schema:
-        type: string
   schemas:
     AccountCollection:
       type: object
