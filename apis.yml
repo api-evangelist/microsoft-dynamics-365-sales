@@ -245,6 +245,9 @@ apis:
   - type: OpenAPI
     url: openapi/microsoft-dynamics-365-sales-sales-orders-api-openapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/microsoft-dynamics-365-sales-capability-edges.yml
+    name: Microsoft Dynamics 365 Sales Business Capability Map
   - type: Overlay
     url: overlays/microsoft-dynamics-365-sales-salesorders-api-overlay.yaml
   - type: AgenticAccess
