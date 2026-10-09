@@ -70,3 +70,38 @@ add_ons:
     The MCP/agent tool surface bills against Copilot Studio credits per invocation. Learn,
     verbatim — "Copilot credits are not charged for specific Dynamics 365 Sales licenses."
   docs: https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: Dynamics 365 Sales Professional
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - other
+  - name: Dynamics 365 Sales Enterprise Edition
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - other
+  - name: Dynamics 365 Sales Premium
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - other
+  - name: Microsoft Relationship Sales
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - other
