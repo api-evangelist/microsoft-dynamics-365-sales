@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/microsoft-dynamics-365-sales/integrations
+- https://n8n.io/integrations/microsoft-dynamics-365-sales/
+- https://composio.dev/toolkits/microsoft-dynamics-365-sales
+- https://monid.ai/tools/microsoft-dynamics-365-sales
+checked:
+- https://composio.dev/toolkits/microsoft-dynamics-365-sales
+- https://monid.ai/tools/microsoft-dynamics-365-sales
+- https://n8n.io/integrations/microsoft-dynamics-365-sales/
+- https://zapier.com/apps/microsoft-dynamics-365-sales/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
