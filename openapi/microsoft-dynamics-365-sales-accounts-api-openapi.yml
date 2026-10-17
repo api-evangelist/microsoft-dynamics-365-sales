@@ -125,11 +125,24 @@ paths:
           description: No Content
 components:
   parameters:
+    accountId:
+      name: accountid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
     orderby:
       name: $orderby
       in: query
       schema:
         type: string
+    odataVersion:
+      name: OData-Version
+      in: header
+      schema:
+        type: string
+        default: '4.0'
     expand:
       name: $expand
       in: query
@@ -140,28 +153,19 @@ components:
       in: query
       schema:
         type: string
-    accountId:
-      name: accountid
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    odataVersion:
-      name: OData-Version
-      in: header
-      schema:
-        type: string
-        default: '4.0'
     filter:
       name: $filter
       in: query
       schema:
         type: string
-    prefer:
-      name: Prefer
+    top:
+      name: $top
+      in: query
+      schema:
+        type: integer
+    ifMatch:
+      name: If-Match
       in: header
-      description: Set to "return=representation" to receive the created record in the response
       schema:
         type: string
     odataMaxVersion:
@@ -170,16 +174,12 @@ components:
       schema:
         type: string
         default: '4.0'
-    ifMatch:
-      name: If-Match
+    prefer:
+      name: Prefer
       in: header
+      description: Set to "return=representation" to receive the created record in the response
       schema:
         type: string
-    top:
-      name: $top
-      in: query
-      schema:
-        type: integer
   schemas:
     AccountCollection:
       type: object
