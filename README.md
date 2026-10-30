@@ -1,4 +1,4 @@
-# Microsoft Dynamics 365 Sales (microsoft-dynamics-365-sales)
+# Microsoft Dynamics 365 Sales
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,67 +66,187 @@
 
 Microsoft Dynamics 365 Sales is Microsoft's enterprise CRM application for managing leads, opportunities, accounts, contacts, sales pipelines, forecasts, and customer relationships, built on the Microsoft Dataverse platform and integrated with Microsoft 365, Teams, Copilot, and Power Platform. Developers programmatically interact with Dynamics 365 Sales data through the Dataverse Web API, an OData v4.0 RESTful interface that exposes every table, action, and function in a Sales environment. The Dataverse Web API uses OAuth 2.0 (Microsoft Entra ID) Bearer token authentication and is reached at a per-environment endpoint such as https://{org}.api.crm.dynamics.com/api/data/v9.2/.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/microsoft-dynamics-365-sales/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/microsoft-dynamics-365-sales/refs/heads/main/apis.yml)
+**Areas:** CRM · Sales · Dynamics 365 · Microsoft · Dataverse · OData · Sales Automation
 
-## Scope
+## Microsoft Dynamics 365 Sales on APIs.io
 
-- **Type:** Index
+Everything profiled for Microsoft Dynamics 365 Sales is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microsoft-dynamics-365-sales/](https://apis.io/providers/microsoft-dynamics-365-sales/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-- CRM
-- Sales
-- Customer Relationship Management
-- Dynamics 365
-- Microsoft
-- Dataverse
-- OData
-- Sales Automation
+- [Microsoft Dataverse Web API (Dynamics 365 Sales)](https://apis.io/apis/microsoft-dynamics-365-sales/dataverse-web-api/) — OData v4.0 RESTful Web API for Microsoft Dataverse used to create, read, update, and delete Dynamics 365 Sales records (leads, opportunities, accounts,…
+- [Microsoft Dynamics 365 Sales Accounts API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-accounts-api/) — Account (customer organization) records
+- [Microsoft Dynamics 365 Sales $batch API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-batch-api/) — The $batch API from Microsoft Dynamics 365 Sales — 1 operation(s) for $batch.
+- [Microsoft Dynamics 365 Sales Contacts API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-contacts-api/) — Contact (person) records
+- [Microsoft Dynamics 365 Sales Invoices API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-invoices-api/) — Invoice records
+- [Microsoft Dynamics 365 Sales Leads API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-leads-api/) — Sales lead records
+- [Microsoft Dynamics 365 Sales Opportunities API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-opportunities-api/) — Sales opportunity records
+- [Microsoft Dynamics 365 Sales Products API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-products-api/) — Product records
+- [Microsoft Dynamics 365 Sales Quotes API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-quotes-api/) — Sales quote records
+- [Microsoft Dynamics 365 Sales Tasks API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-tasks-api/) — Activity tasks
+- [Dynamics 365 Sales MCP Server](https://apis.io/apis/microsoft-dynamics-365-sales/dynamics-365-sales-mcp-server/) — Microsoft's hosted Model Context Protocol server for Dynamics 365 Sales. Exposes 20 sales tools to any MCP-capable agent — lead and account research,…
+- [Microsoft Dynamics 365 Sales Sales Orders API](https://apis.io/apis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-sales-orders-api/) — Sales order records
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Microsoft Dataverse Web API (Dynamics 365 Sales)
+Event-driven and webhook contracts.
 
-OData v4.0 RESTful Web API for Microsoft Dataverse used to create, read, update, and delete Dynamics 365 Sales records (leads, opportunities, accounts, contacts, quotes, orders, invoices, products) and to invoke bound and unbound actions and functions. Authentication uses OAuth 2.0 Bearer tokens issued by Microsoft Entra ID; the endpoint is per-environment, e.g. https://{org}.api.crm.dynamics.com/api/data/v9.2/.
+- [Microsoft Dynamics 365 Sales Webhooks](https://apis.io/asyncapis/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-webhooks/)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview)
-- **Base URL:** `https://{org}.api.crm.dynamics.com/api/data/v9.2`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- CRM
-- Sales
-- Dataverse
-- OData
-- Web API
-- Dynamics 365
+- [microsoft-dynamics-365-sales-mcp.yml](https://apis.io/servers/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-mcp-yml/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about)
-- [Overview](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview)
-- [Service  Documents](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-service-documents)
-- [Getting Started](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api)
-- [Authentication](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authentication)
-- [Postman Collection](collections/microsoft-dynamics-365-sales.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-dynamics-365-sales.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Microsoft Dynamics 365 Sales Agentic Access](https://apis.io/agentic-access/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-agentic-access/)
 
-- [GitHub Organization](https://github.com/MicrosoftDocs)
-- [LinkedIn](https://www.linkedin.com/showcase/microsoft-dynamics-365-sales)
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [Microsoft Dataverse Web API (Dynamics 365 Sales)](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-accounts-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts $batch API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-batch-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Contacts API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-contacts-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Invoices API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-invoices-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Leads API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-leads-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Opportunities API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-opportunities-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Products API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-products-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Quotes API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-quotes-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts SalesOrders API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-salesorders-api/)
+- [Microsoft Dataverse Web API (Dynamics 365 Sales) Accounts Tasks API](https://apis.io/collections/microsoft-dynamics-365-sales/open-microsoft-dynamics-365-sales-tasks-api/)
+
+#### Overlays (20)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Microsoft Dynamics 365 Sales Accounts Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-accounts-api-overlay/)
+- [Microsoft Dynamics 365 Sales Accounts Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-accounts-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Batch Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-batch-api-overlay/)
+- [Microsoft Dynamics 365 Sales Batch Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-batch-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Contacts Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-contacts-api-overlay/)
+- [Microsoft Dynamics 365 Sales Contacts Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-contacts-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Invoices Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-invoices-api-overlay/)
+- [Microsoft Dynamics 365 Sales Invoices Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-invoices-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Leads Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-leads-api-overlay/)
+- [Microsoft Dynamics 365 Sales Leads Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-leads-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Opportunities Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-opportunities-api-overlay/)
+- [Microsoft Dynamics 365 Sales Opportunities Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-opportunities-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Products Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-products-api-overlay/)
+- [Microsoft Dynamics 365 Sales Products Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-products-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Quotes Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-quotes-api-overlay/)
+- [Microsoft Dynamics 365 Sales Quotes Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-quotes-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Sales Orders Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-sales-orders-api-phrasing-overlay/)
+- [Microsoft Dynamics 365 Sales Salesorders Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-salesorders-api-overlay/)
+- [Microsoft Dynamics 365 Sales Tasks Api Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-tasks-api-overlay/)
+- [Microsoft Dynamics 365 Sales Tasks Api Phrasing Overlay](https://apis.io/overlays/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-tasks-api-phrasing-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Microsoft Dynamics 365 Sales Authentication](https://apis.io/security/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-authentication/)
+- [Microsoft Dynamics 365 Sales Domain Security](https://apis.io/security/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-domain-security/)
+- [Microsoft Dynamics 365 Sales Trust Center](https://apis.io/security/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-trust-center/)
+- [Microsoft Dynamics 365 Sales Vulnerability Disclosure](https://apis.io/security/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Microsoft Dynamics 365 Sales Scopes](https://apis.io/scopes/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Microsoft Dynamics 365 Sales Plans Pricing](https://apis.io/plans/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Microsoft Dynamics 365 Sales Rate Limits](https://apis.io/rate-limits/microsoft-dynamics-365-sales/microsoft-dynamics-365-sales-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.microsoft.com/en-us/dynamics-365/products/sales)
 - [Documentation](https://learn.microsoft.com/en-us/dynamics365/sales/)
-- [Developer  Documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/overview)
+- [Getting started](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/perform-operations-web-api)
+- [API reference](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about)
 - [Pricing](https://www.microsoft.com/en-us/dynamics-365/products/sales/pricing)
-- [Sign Up](https://dynamics.microsoft.com/en-us/sales/overview/)
+- [Sign up](https://dynamics.microsoft.com/en-us/sales/overview/)
+- [Support](https://www.microsoft.com/en-us/dynamics-365/support)
+- [Blog](https://www.microsoft.com/en-us/dynamics-365/blog/feed/)
+- [Security](https://www.microsoft.com/en-us/msrc/cvd)
+- [Compliance](https://www.microsoft.com/en-us/trust-center/compliance/compliance-overview)
+- [Terms of service](https://www.microsoft.com/en-us/servicesagreement/)
+- [Privacy policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [GitHub](https://github.com/MicrosoftDocs)
+- [Status](https://status.cloud.microsoft/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 70.8** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 55.4 |
+| Contract governance | 18.2 |
+| Operational transparency | 89.5 |
+| Developer ergonomics | 80.4 |
+| Access clarity | 78.9 |
+
+**Agent readiness 40.5** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | templated |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microsoft-dynamics-365-sales/](https://apis.io/providers/microsoft-dynamics-365-sales/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Microsoft Dynamics 365 Sales: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microsoft-dynamics-365-sales/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
